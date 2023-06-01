@@ -69,7 +69,7 @@ class ParentComponent extends Component
     public function mount()
     {
         $this->book = ['title' => 'initial book title', 'author' => 'initial book author'];
-        $this->eBook = ['title' => '', 'author' => '']; //in case eBook was not typehint or declared as array
+        $this->eBook = ['title' => 'initial book title', 'author' => 'initial book author']; //in case eBook was not typehint or declared as array
 
         /*
         $this->eBook = new EBook([

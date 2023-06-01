@@ -30,9 +30,7 @@ class ChildComponent extends Component
     {
         $book = new Book($this->book['title'], $this->book['author']);
 
-        //$this->emit('bookUpdated', $book->toArray());
-
-        $this->emitUp('bookUpdated', $book);
+        $this->emitUpBook($book);
     }
 
     public function updatedEBook()
@@ -42,10 +40,22 @@ class ChildComponent extends Component
             'author' => $this->eBook->author,
         ]);
 
+        $this->emitUpEBook($eBook);
+
+    }
+
+    private function emitUpBook($book)
+    {
+        //$this->emit('bookUpdated', $book->toArray());
+
+        $this->emitUp('bookUpdated', $book);
+    }
+
+    private function emitUpEBook($eBook)
+    {
         //$this->emit('eBookUpdated', $eBook->toArray());
 
         $this->emitUp('eBookUpdated', $eBook);
-
     }
 
     public function render()
