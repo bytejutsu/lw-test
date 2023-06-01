@@ -8,7 +8,13 @@ use Livewire\Component;
 
 class ParentComponent extends Component
 {
+    /*
+     * Livewire component's [parent-component] public property [book] must be of type:
+     * [numeric, string, array, null, or boolean].
+     * Only protected or private properties can be set as other types because JavaScript doesn't need to access them.
+     */
     public $book;
+
     public $eBook;
 
     protected $listeners = ['bookUpdated','eBookUpdated'];

@@ -28,7 +28,9 @@ class ChildComponent extends Component
     {
         $book = new Book($this->book['title'], $this->book['author']);
 
-        $this->emit('bookUpdated', $book->toArray());
+        //$this->emit('bookUpdated', $book->toArray());
+
+        $this->emit('bookUpdated', $book);
     }
 
     public function updatedEBook()
