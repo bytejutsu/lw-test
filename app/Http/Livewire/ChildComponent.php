@@ -12,6 +12,11 @@ class ChildComponent extends Component
 
     public EBook $eBook;
 
+    protected $rules = [
+        'eBook.title' => 'string',
+        'eBook.author' => 'string',
+    ];
+
     public function mount()
     {
         $this->book = ['title' => '', 'author' => ''];
@@ -28,7 +33,10 @@ class ChildComponent extends Component
 
     public function updatedEBook()
     {
-        $eBook = new EBook($this->eBook->title, $this->eBook->author);
+        $eBook = new EBook([
+            'title' => $this->eBook->title,
+            'author' => $this->eBook->author,
+        ]);
 
         $this->emit('eBookUpdated', $eBook->toArray());
     }
