@@ -3,12 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Models\Book;
+use App\Models\EBook;
 use Livewire\Component;
 
 class ParentComponent extends Component
 {
-    public $book = ['title' => '', 'author' => ''];
-    public $eBook = ['title' => '', 'author' => ''];
+    public $book;
+    public $eBook;
 
     protected $listeners = ['bookUpdated','eBookUpdated'];
 
@@ -26,7 +27,11 @@ class ParentComponent extends Component
     public function mount()
     {
         $this->book = ['title' => '', 'author' => ''];
-        $this->eBook = ['title' => '', 'author' => ''];
+        //$this->eBook = ['title' => '', 'author' => ''];
+        $this->eBook = new EBook([
+            'title' => '',
+            'author' => '',
+        ]);
     }
 
     public function render()

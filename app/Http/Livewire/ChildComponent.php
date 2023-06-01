@@ -38,7 +38,10 @@ class ChildComponent extends Component
             'author' => $this->eBook->author,
         ]);
 
-        $this->emit('eBookUpdated', $eBook->toArray());
+        //$this->emit('eBookUpdated', $eBook->toArray());
+
+        $this->emit('eBookUpdated', $eBook);
+
     }
 
     public function render()
