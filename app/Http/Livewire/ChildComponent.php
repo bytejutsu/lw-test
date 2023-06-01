@@ -21,9 +21,20 @@ class ChildComponent extends Component
     public function mount()
     {
         //book must be an array otherwise livewire won't be able to pass it to the view (as a normal non-eloquent model object)
-        $this->book = ['title' => '', 'author' => ''];
+        $this->book = ['title' => 'first title after mounting the child', 'author' => 'first author after mounting the child'];
         //livewire is able to pass eloquent model object to the view
         $this->eBook = EBook::inRandomOrder()->first();
+
+        //directly after performing initial calculations do reflect them on the parent => doesn't work :(
+
+
+    }
+
+    //this method will be wire to wire:init and called on init
+    public function initialize()
+    {
+        $this->emitUpBook($this->book);
+        $this->emitUpEBook($this->eBook);
     }
 
     public function updatedBook()

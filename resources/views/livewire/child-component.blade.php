@@ -1,4 +1,7 @@
-<div class="border p-4 m-4">
+<div wire:init="initialize" class="border p-4 m-4">
+
+    {{-- initialize will be called on init so the child-component properties will be emitted to the parent --}}
+
     <h2>Child Component</h2>
 
     {{-- in the case of wiring attributes both accessing the attributes of arrays or eloquent model objects is the same with a . --}}
