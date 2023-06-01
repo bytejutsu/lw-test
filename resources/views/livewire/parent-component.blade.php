@@ -8,8 +8,8 @@
 
     <hr/>
 
-    <p>EBook Title: {{ $eBook['title'] }}</p>
-    <p>EBook Author: {{ $eBook['author'] }}</p>
+    <p>EBook Title: {{ $eBook->title }}</p>
+    <p>EBook Author: {{ $eBook->author }}</p>
 
     <hr/>
 
