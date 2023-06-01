@@ -32,7 +32,7 @@ class ChildComponent extends Component
 
         //$this->emit('bookUpdated', $book->toArray());
 
-        $this->emit('bookUpdated', $book);
+        $this->emitUp('bookUpdated', $book);
     }
 
     public function updatedEBook()
@@ -44,7 +44,7 @@ class ChildComponent extends Component
 
         //$this->emit('eBookUpdated', $eBook->toArray());
 
-        $this->emit('eBookUpdated', $eBook);
+        $this->emitUp('eBookUpdated', $eBook);
 
     }
 

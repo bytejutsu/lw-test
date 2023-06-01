@@ -21,7 +21,8 @@ class ParentComponent extends Component
      */
     public $book;
 
-    public EBook $eBook;
+    public $eBook;
+    //public EBook $eBook; this property state value doesn't persist after rerendering :( ! very sad ! we must use an array
 
     protected $listeners = ['bookUpdated','eBookUpdated'];
 
@@ -37,7 +38,7 @@ class ParentComponent extends Component
     {
         //dd(gettype($eBookData)); // => array: can't be cast or typehint to something else because emit from child serializes to array
 
-        //$this->eBook = $eBookData;  //also works but the property eBook should be declared as array or omit the type but not EBook
+        $this->eBook = $eBookData;  //also works but the property eBook should be declared as array or omit the type but not EBook
 
         /*
          * because both assigning the eBook as an array or eloquent model work: here you can choose
@@ -52,23 +53,34 @@ class ParentComponent extends Component
          * emit always serializes the object passed to it
          */
 
+        /*
         $this->eBook = new EBook([
             'title' => $eBookData['title'],
             'author' => $eBookData['author']
         ]);
+        */
+
+        /*
+        $this->eBook->title = $eBookData['title'];
+        $this->eBook->author = $eBookData['author'];
+        */
     }
 
     public function mount()
     {
         $this->book = ['title' => 'initial book title', 'author' => 'initial book author'];
-        //$this->eBook = ['title' => '', 'author' => '']; //in case eBook was not typehint or declared as array
+        $this->eBook = ['title' => '', 'author' => '']; //in case eBook was not typehint or declared as array
+
+        /*
         $this->eBook = new EBook([
             'title' => 'initial eBook title',
             'author' => 'initial eBook author',
         ]);
+        */
 
         //dd(gettype($this->eBook)); // => object
     }
+
 
     public function render()
     {

@@ -8,15 +8,19 @@
 
     <hr/>
 
+    {{--
     <p>EBook Title: {{ $eBook->title }}</p>
     <p>EBook Author: {{ $eBook->author }}</p>
+    --}}
 
-    {{-- it also works in the blade view for eloquent model objects to be accessed as arrays
+    {{-- it also works in the blade view for eloquent model objects to be accessed as arrays --}}
+
+
 
     <p>EBook Title: {{ $eBook['title'] }}</p>
     <p>EBook Author: {{ $eBook['author'] }}</p>
 
-    --}}
+
 
     <hr/>
 
