@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ebooks', function (Blueprint $table) {
+        Schema::create('e_books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->string('author');
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ebooks');
+        Schema::dropIfExists('e_books');
     }
 };

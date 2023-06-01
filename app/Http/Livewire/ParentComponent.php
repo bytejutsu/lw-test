@@ -8,8 +8,9 @@ use Livewire\Component;
 class ParentComponent extends Component
 {
     public $book = ['title' => '', 'author' => ''];
+    public $eBook = ['title' => '', 'author' => ''];
 
-    protected $listeners = ['bookUpdated'];
+    protected $listeners = ['bookUpdated','eBookUpdated'];
 
 
     public function bookUpdated($bookData)
@@ -17,9 +18,15 @@ class ParentComponent extends Component
         $this->book = $bookData;
     }
 
+    public function eBookUpdated($eBookData)
+    {
+        $this->eBook = $eBookData;
+    }
+
     public function mount()
     {
         $this->book = ['title' => '', 'author' => ''];
+        $this->eBook = ['title' => '', 'author' => ''];
     }
 
     public function render()

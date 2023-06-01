@@ -3,6 +3,13 @@
     <p>Book Title: {{ $book['title'] }}</p>
     <p>Book Author: {{ $book['author'] }}</p>
 
+    <br>
+
+    <p>EBook Title: {{ $eBook['title'] }}</p>
+    <p>EBook Author: {{ $eBook['author'] }}</p>
+
+    <br>
+
     <livewire:child-component/>
 
 </div>
