@@ -2,7 +2,7 @@
 
     {{-- initialize will be called on init so the child-component properties will be emitted to the parent --}}
 
-    <h2>Child Component</h2>
+    <h2 class="text-center">Child Component</h2>
 
     {{-- in the case of wiring attributes both accessing the attributes of arrays or eloquent model objects is the same with a . --}}
 

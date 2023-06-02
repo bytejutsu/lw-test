@@ -24,6 +24,12 @@ class ParentComponent extends Component
     public $eBook;
     //public EBook $eBook; this property state value doesn't persist after rerendering :( ! very sad ! we must use an array
 
+    private $internalBook;
+    private $internalEBook;
+
+    //public int $bookTitleLetterCount; // X don't declare properties for computed properties
+    //public int $eBookTitleLetterCount; // X don't declare properties for computed properties
+
     protected $listeners = ['bookUpdated','eBookUpdated'];
 
 
@@ -66,10 +72,23 @@ class ParentComponent extends Component
         */
     }
 
+    public function getBookTitleLetterCountProperty()
+    {
+        return strlen($this->book['title']);
+    }
+
+    public function getEBookTitleLetterCountProperty()
+    {
+        return strlen($this->eBook['title']);
+    }
+
     public function mount()
     {
         $this->book = ['title' => 'initial book title', 'author' => 'initial book author'];
         $this->eBook = ['title' => 'initial book title', 'author' => 'initial book author']; //in case eBook was not typehint or declared as array
+
+        //$this->bookTitleLetterCount = 0; // X don't initialize a computed property in mount it will break the functioning
+        //$this->eBookTitleLetterCount = 0; // X don't initialize a computed property in mount it will break the functioning
 
         /*
         $this->eBook = new EBook([
