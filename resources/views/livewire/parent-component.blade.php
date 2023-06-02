@@ -1,4 +1,4 @@
-<div class="border p-4 m-4">
+<div class="border-4 border-black p-4 m-4">
     <h2 class="text-center font-bold">Parent Component</h2>
 
     <br/>
