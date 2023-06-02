@@ -12,22 +12,25 @@ class ChildComponent extends Component
 
     public EBook $eBook;
 
+    public $calculation;
+
     //rules is necessary for the eloquent model property otherwise you get an error
     protected $rules = [
         'eBook.title' => 'string',
         'eBook.author' => 'string',
     ];
 
-    public function mount()
+    public function mount($book, $initEBook)
     {
         //dd('child mount run first');
 
 
         //book must be an array otherwise livewire won't be able to pass it to the view (as a normal non-eloquent model object)
-        $this->book = ['title' => 'first title after mounting the child', 'author' => 'first author after mounting the child'];
+        //$this->book = ['title' => 'first title after mounting the child', 'author' => 'first author after mounting the child'];
+        $this->book = $book;
         //livewire is able to pass eloquent model object to the view
-        $this->eBook = EBook::inRandomOrder()->first();
-
+        //$this->eBook = EBook::inRandomOrder()->first();
+        $this->eBook = new EBook($initEBook);
 
         //directly after performing initial calculations do reflect them on the parent => doesn't work :(
 

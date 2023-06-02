@@ -36,6 +36,8 @@
 
     <br/>
 
-    <livewire:child-component/>
+    {{-- renamed parameter eBook to initEBook to avoid typehinting inside the child component class because $eBook is passed as array --}}
+    <livewire:child-component :book="$book" :initEBook="$eBook"/>
+
 
 </div>

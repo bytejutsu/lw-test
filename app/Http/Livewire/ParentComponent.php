@@ -134,8 +134,8 @@ class ParentComponent extends Component
     {
         // dd('parent mount run first);
 
-        $this->book = ['title' => 'initial book title', 'author' => 'initial book author'];
-        $this->eBook = ['title' => 'initial book title', 'author' => 'initial book author']; //in case eBook was not typehint or declared as array
+        $this->book = ['title' => 'initial book title from parent', 'author' => 'initial book author from parent'];
+        $this->eBook = ['title' => 'initial eBook title from parent', 'author' => 'initial ebook author from parent']; //in case eBook was not typehint or declared as array
 
         //$this->bookTitleLetterCount = 0; // X don't initialize a computed property in mount it will break the functioning
         //$this->eBookTitleLetterCount = 0; // X don't initialize a computed property in mount it will break the functioning
