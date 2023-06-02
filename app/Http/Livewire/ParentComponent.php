@@ -174,6 +174,8 @@ class ParentComponent extends Component
         //dd(gettype($this->eBook)); // => object
     }
 
+    //todo: make the child component perform initial computation with the passed data from parent in mount + make wirable model
+
     public function render()
     {
         return view('livewire.parent-component');
