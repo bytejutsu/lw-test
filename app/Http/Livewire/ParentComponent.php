@@ -135,7 +135,17 @@ class ParentComponent extends Component
         // dd('parent mount run first);
 
         $this->book = ['title' => 'initial book title from parent', 'author' => 'initial book author from parent'];
-        $this->eBook = ['title' => 'initial eBook title from parent', 'author' => 'initial ebook author from parent']; //in case eBook was not typehint or declared as array
+
+        //dd(EBook::inRandomOrder()->first()->attributesToArray());
+
+        //$this->eBook = EBook::inRandomOrder()->first()->attributesToArray();
+        //$this->eBook = ['title' => 'initial eBook title from parent', 'author' => 'initial ebook author from parent']; //in case eBook was not typehint or declared as array
+
+        $this->eBook = EBook::inRandomOrder()->first()->attributesToArray();
+
+
+        //dd($this->eBook);
+
 
         //$this->bookTitleLetterCount = 0; // X don't initialize a computed property in mount it will break the functioning
         //$this->eBookTitleLetterCount = 0; // X don't initialize a computed property in mount it will break the functioning
@@ -163,7 +173,6 @@ class ParentComponent extends Component
 
         //dd(gettype($this->eBook)); // => object
     }
-
 
     public function render()
     {
