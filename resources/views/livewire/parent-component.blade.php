@@ -9,9 +9,12 @@
     <hr/>
 
     {{-- notice how you need to use the php $this to access to value in case of a computed property --}}
-    <p>Book title letter count : {{ $this->bookTitleLetterCount }}</p>
+
+    <p>ABook title letter count : {{ $this->aBookTitleLetterCount }}</p>
 
     <hr/>
+
+    <br/>
 
     {{--
     <p>EBook Title: {{ $eBook->title }}</p>
@@ -30,6 +33,8 @@
     <p>eBook title letter count : {{ $this->eBookTitleLetterCount }}</p>
 
     <hr/>
+
+    <br/>
 
     <livewire:child-component/>
 

@@ -24,8 +24,21 @@ class ParentComponent extends Component
     public $eBook;
     //public EBook $eBook; this property state value doesn't persist after rerendering :( ! very sad ! we must use an array
 
-    private $internalBook;
-    private $internalEBook;
+
+    //NOTE: !!!!! all private state will not persist because it is private: so after listener fires it will be lost !!!!!
+    // you have to make it public so it persists even you are using it internally only
+
+    //private Book $internalBook; //typing this property gives the error: Typed property must not be accessed before initialization
+    //public $internalBook; //so this is not allowed because when public internalBook can't be of type Book
+
+    //even as an eloquent model object and public this state will not persist when an event listener fires after an emit
+    //public ?EBook $internalEBook = null; //do this to prevent the error: Typed property must not be accessed before initialization
+    public $internalEBook; // best way is to handle it as an array
+
+    //private array $internalABook; //internal array book
+    public $internalABook; //omitted type as array
+
+
 
     //public int $bookTitleLetterCount; // X don't declare properties for computed properties
     //public int $eBookTitleLetterCount; // X don't declare properties for computed properties
@@ -38,6 +51,12 @@ class ParentComponent extends Component
         //dd(gettype($bookData)); // => array: can't be cast or typehint to something else because emit from child serializes to array
 
         $this->book = $bookData;
+
+
+        $this->internalABook = ['title' => $bookData['title'], 'author' => $bookData['author']];
+
+        //$this->internalBook = new Book(title: $bookData['title'], author: $bookData['author']); // not possible
+
     }
 
     public function eBookUpdated($eBookData)
@@ -70,25 +89,70 @@ class ParentComponent extends Component
         $this->eBook->title = $eBookData['title'];
         $this->eBook->author = $eBookData['author'];
         */
+
+        //
+        //------------------------------------------------------------------------
+        //
+
+        //dd($this->internalEBook); //null so apparently eloquent model object internalEBook doesn't persis too
+
+        /*
+            $this->internalEBook->title = $eBookData['title'];
+            $this->internalEBook->author = $eBookData['author'];
+        */
+
+        //$this->internalEBook = new EBook(['title' => $eBookData['title'], 'author' => $eBookData['author']]); //will not persist
+
+        $this->internalEBook = ['title' => $eBookData['title'], 'author' => $eBookData['author']];
+
     }
 
+
+    /*
+     * not possible since internalBook is public and can't be of type Book
     public function getBookTitleLetterCountProperty()
     {
-        return strlen($this->book['title']);
+        return strlen($this->internalBook?->title);
     }
+    */
 
     public function getEBookTitleLetterCountProperty()
     {
-        return strlen($this->eBook['title']);
+        //return strlen($this->internalEBook?->title); //will not persist
+
+        if(!is_null($this->internalEBook)) return strlen($this->internalEBook['title']);
+    }
+
+    public function getABookTitleLetterCountProperty()
+    {
+        if(!is_null($this->internalABook)) return strlen($this->internalABook['title']);
+
+        //return strlen($this->internalABook['title']);
     }
 
     public function mount()
     {
+        // dd('parent mount run first);
+
         $this->book = ['title' => 'initial book title', 'author' => 'initial book author'];
         $this->eBook = ['title' => 'initial book title', 'author' => 'initial book author']; //in case eBook was not typehint or declared as array
 
         //$this->bookTitleLetterCount = 0; // X don't initialize a computed property in mount it will break the functioning
         //$this->eBookTitleLetterCount = 0; // X don't initialize a computed property in mount it will break the functioning
+
+        //$this->internalBook = new Book($this->book['title'],$this->book['author']); //not possible because internalBook must be public
+
+        /*
+         * will not persist
+        $this->internalEBook = new EBook([
+            'title' => $this->eBook['title'],
+            'author' => $this->eBook['author'],
+        ]);
+        */
+
+        $this->internalEBook = ['title' => $this->eBook['title'], 'author' => $this->eBook['author']];
+
+        $this->internalABook = ['title' => $this->book['title'], 'author' => $this->eBook['author']];
 
         /*
         $this->eBook = new EBook([
