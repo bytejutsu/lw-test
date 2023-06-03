@@ -3,14 +3,14 @@
 
     <br/>
 
-    <p>Book Title: {{ $aBook['title'] }}</p>
-    <p>Book Author: {{ $aBook['author'] }}</p>
+    <p><span class="text-blue-500">ABook Title:</span> {{ $aBook['title'] }}</p>
+    <p><span class="text-blue-500">ABook Author:</span> {{ $aBook['author'] }}</p>
 
     <hr/>
 
     {{-- notice how you need to use the php $this to access to value in case of a computed property --}}
 
-    <p>ABook title letter count : {{ $this->aBookTitleLetterCount }}</p>
+    <p>ABook title letter count : <span class="text-blue-500">{{ $this->aBookTitleLetterCount }}</span></p>
 
     <hr/>
 
@@ -25,23 +25,23 @@
 
 
 
-    <p>EBook Title: {{ $eBook['title'] }}</p>
-    <p>EBook Author: {{ $eBook['author'] }}</p>
+    <p><span class="text-red-500">EBook Title: </span>{{ $eBook['title'] }}</p>
+    <p><span class="text-red-500">EBook Author: </span>{{ $eBook['author'] }}</p>
 
     <hr/>
 
-    <p>eBook title letter count : {{ $this->eBookTitleLetterCount }}</p>
+    <p>EBook title letter count : <span class="text-red-500">{{ $this->eBookTitleLetterCount }}</span></p>
 
     <hr/>
 
     <br/>
 
-    <p>book Title: {{ $book->title }}</p>
-    <p>book Author: {{ $book->author }}</p>
+    <p><span class="text-green-500">Book Title: </span>{{ $book->title }}</p>
+    <p><span class="text-green-500">Book Author: </span>{{ $book->author }}</p>
 
     <hr/>
 
-    <p>book title letter count : {{ $this->bookTitleLetterCount }}</p>
+    <p>Book title letter count : <span class="text-green-500">{{ $this->bookTitleLetterCount }}</span></p>
 
     <hr/>
 

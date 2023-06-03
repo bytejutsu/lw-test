@@ -4,11 +4,11 @@
     <br/>
 
     <div class="flex justify-between">
-        <label for="a-book-title">ABook Title:</label>
+        <label for="a-book-title" class="text-blue-500">ABook Title:</label>
         <input type="text" id="a-book-title" wire:model="aBook.title">
     </div>
     <div class="flex justify-between">
-        <label for="a-book-author">ABook Author:</label>
+        <label for="a-book-author" class="text-blue-500">ABook Author:</label>
         <input type="text" id="a-book-author" wire:model="aBook.author">
     </div>
 </div>
