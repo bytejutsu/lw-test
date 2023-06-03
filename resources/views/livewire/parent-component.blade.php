@@ -48,7 +48,12 @@
     <br/>
 
     {{-- renamed parameter eBook to initEBook to avoid typehinting inside the child component class because $eBook is passed as array --}}
-    <livewire:child-component :aBook="$aBook" :initEBook="$eBook" :book="$book"/>
+    <div class="flex justify-between">
+        <livewire:a-book-child-component :aBook="$aBook"/>
+        <livewire:e-book-child-component :initEBook="$eBook"/>
+        <livewire:book-child-component :book="$book"/>
+    </div>
+
 
 
 </div>
