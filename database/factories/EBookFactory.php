@@ -19,7 +19,7 @@ class EBookFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->words(3, true),
+            'title' => ucwords($this->faker->catchPhrase .' '.$this->faker->bs), //to generate an english title
             'author' => $this->faker->name(),
         ];
     }
