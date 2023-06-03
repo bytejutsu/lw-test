@@ -8,9 +8,9 @@ use Livewire\Component;
 
 class ABookChildComponent extends Component
 {
-    public $aBook; //type will be hinted as array
+    public array $aBook;
 
-    public function mount($aBook)
+    public function mount(array $aBook)
     {
         $this->aBook = $aBook;
     }
