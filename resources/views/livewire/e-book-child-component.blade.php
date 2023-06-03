@@ -1,5 +1,6 @@
 <div class="border-2 border-red-500 p-4 m-4">
     <h2 class="text-center font-bold text-red-500">EBook Child Component</h2>
+    <h2 class="text-center font-bold text-red-500">(Eloquent Model)</h2>
 
     <br/>
 

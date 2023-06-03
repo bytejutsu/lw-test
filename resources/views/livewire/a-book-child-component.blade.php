@@ -1,6 +1,6 @@
 <div class="border-2 border-blue-500 p-4 m-4">
     <h2 class="text-center font-bold text-blue-500">ABook Child Component</h2>
-
+    <h2 class="text-center font-bold text-blue-500">(Array)</h2>
     <br/>
 
     <div class="flex justify-between">

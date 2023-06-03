@@ -64,6 +64,8 @@ class ParentComponent extends Component
 
     public function mount()
     {
+        //todo: use the livewire fill method
+
         $this->aBook = ['title' => 'initial aBook title from parent', 'author' => 'initial aBook author from parent'];
 
         $this->eBook = EBook::inRandomOrder()->first();
