@@ -29,17 +29,20 @@ class ParentComponent extends Component
 
     public function aBookUpdated($aBookData)
     {
+        //aBookData is an array because it is sent via an emit event => serialized
         $this->aBook = $aBookData;
     }
 
     public function eBookUpdated($eBookData)
     {
+        //eBookData is an array because it is sent via an emit event => serialized
         $this->eBook = new EBook($eBookData);
     }
 
-    public function bookUpdated($book)
+    public function bookUpdated($bookData)
     {
-        $this->book = new Book($book['title'], $book['author']);
+        //bookData is an array because it is sent via an emit event => serialized
+        $this->book = new Book($bookData['title'], $bookData['author']);
     }
 
 
