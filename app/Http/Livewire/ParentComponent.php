@@ -10,12 +10,20 @@ class ParentComponent extends Component
 {
 
     public $aBook;
-    public $eBook;
+    public EBook $eBook;
     public Book $book;
-    //public EBook $eBook; this property state value doesn't persist after rerendering :( ! very sad ! we must use an array
 
     //NOTE: !!!!! all private state will not persist because it is private: so after listener fires it will be lost !!!!!
     // you have to make it public so it persists even you are using it internally only
+
+
+    //rules is MANDATORY!!! for the eloquent model property to work properly
+    // !!!! otherwise you on refresh the model data will DISAPPEAR and YOU WILL NOT !!! get an ERROR !!!!
+    protected $rules = [
+        'eBook.title' => 'string',
+        'eBook.author' => 'string',
+    ];
+
 
     protected $listeners = ['aBookUpdated','eBookUpdated','bookUpdated'];
 
@@ -26,7 +34,7 @@ class ParentComponent extends Component
 
     public function eBookUpdated($eBookData)
     {
-        $this->eBook = $eBookData;
+        $this->eBook = new EBook($eBookData);
     }
 
     public function bookUpdated($book)
@@ -37,13 +45,13 @@ class ParentComponent extends Component
 
     public function getBookTitleLetterCountProperty()
     {
-        return strlen($this->book?->title);
+        return strlen($this->book->title);
     }
 
 
     public function getEBookTitleLetterCountProperty()
     {
-        return strlen($this->eBook['title']);
+        return strlen($this->eBook->title);
     }
 
     public function getABookTitleLetterCountProperty()
@@ -55,21 +63,7 @@ class ParentComponent extends Component
     {
         $this->aBook = ['title' => 'initial aBook title from parent', 'author' => 'initial aBook author from parent'];
 
-        $this->eBook = EBook::inRandomOrder()->first()->attributesToArray();
-
-        /*
-         * will not persist
-        $this->internalEBook = new EBook([
-            'title' => $this->eBook['title'],
-            'author' => $this->eBook['author'],
-        ]);
-        */
-        /*
-        $this->eBook = new EBook([
-            'title' => 'initial eBook title',
-            'author' => 'initial eBook author',
-        ]);
-        */
+        $this->eBook = EBook::inRandomOrder()->first();
 
         $this->book = new Book('initial book title from parent', 'initial book author from parent');
     }
