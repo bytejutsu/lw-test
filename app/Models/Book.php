@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class Book
+use Livewire\Wireable;
+
+class Book implements Wireable
 {
     public $title;
     public $author;
@@ -11,13 +13,22 @@ class Book
     {
         $this->title = $title;
         $this->author = $author;
+
+    }
+
+
+    public function toLivewire()
+    {
+        return $this->toArray();
+    }
+
+    public static function fromLivewire($value)
+    {
+        return new static($value['title'], $value['author']);
     }
 
     public function toArray()
     {
-        return [
-            'title' => $this->title,
-            'author' => $this->author,
-        ];
+        return ['title' => $this->title, 'author' => $this->author];
     }
 }

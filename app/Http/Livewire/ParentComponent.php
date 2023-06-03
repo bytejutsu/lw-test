@@ -19,11 +19,10 @@ class ParentComponent extends Component
      * because livewire only supports eloquent models to be passed as php objects to the view
      *
      */
-    public $book;
-
+    public $aBook;
     public $eBook;
+    public Book $book;
     //public EBook $eBook; this property state value doesn't persist after rerendering :( ! very sad ! we must use an array
-
 
     //NOTE: !!!!! all private state will not persist because it is private: so after listener fires it will be lost !!!!!
     // you have to make it public so it persists even you are using it internally only
@@ -43,17 +42,17 @@ class ParentComponent extends Component
     //public int $bookTitleLetterCount; // X don't declare properties for computed properties
     //public int $eBookTitleLetterCount; // X don't declare properties for computed properties
 
-    protected $listeners = ['bookUpdated','eBookUpdated'];
+    protected $listeners = ['aBookUpdated','eBookUpdated','bookUpdated'];
 
 
-    public function bookUpdated($bookData)
+    public function aBookUpdated($aBookData)
     {
         //dd(gettype($bookData)); // => array: can't be cast or typehint to something else because emit from child serializes to array
 
-        $this->book = $bookData;
+        $this->aBook = $aBookData;
 
 
-        $this->internalABook = ['title' => $bookData['title'], 'author' => $bookData['author']];
+        $this->internalABook = $aBookData;
 
         //$this->internalBook = new Book(title: $bookData['title'], author: $bookData['author']); // not possible
 
@@ -107,14 +106,19 @@ class ParentComponent extends Component
 
     }
 
+    public function bookUpdated($book)
+    {
 
-    /*
-     * not possible since internalBook is public and can't be of type Book
+        $this->book = new Book($book['title'], $book['author']);
+
+    }
+
+
     public function getBookTitleLetterCountProperty()
     {
-        return strlen($this->internalBook?->title);
+        return strlen($this->book?->title);
     }
-    */
+
 
     public function getEBookTitleLetterCountProperty()
     {
@@ -134,7 +138,7 @@ class ParentComponent extends Component
     {
         // dd('parent mount run first);
 
-        $this->book = ['title' => 'initial book title from parent', 'author' => 'initial book author from parent'];
+        $this->aBook = ['title' => 'initial aBook title from parent', 'author' => 'initial aBook author from parent'];
 
         //dd(EBook::inRandomOrder()->first()->attributesToArray());
 
@@ -142,6 +146,8 @@ class ParentComponent extends Component
         //$this->eBook = ['title' => 'initial eBook title from parent', 'author' => 'initial ebook author from parent']; //in case eBook was not typehint or declared as array
 
         $this->eBook = EBook::inRandomOrder()->first()->attributesToArray();
+
+        $this->book = new Book('initial book title from parent', 'initial book author from parent');
 
 
         //dd($this->eBook);
@@ -162,7 +168,7 @@ class ParentComponent extends Component
 
         $this->internalEBook = ['title' => $this->eBook['title'], 'author' => $this->eBook['author']];
 
-        $this->internalABook = ['title' => $this->book['title'], 'author' => $this->eBook['author']];
+        $this->internalABook = ['title' => $this->aBook['title'], 'author' => $this->eBook['author']];
 
         /*
         $this->eBook = new EBook([

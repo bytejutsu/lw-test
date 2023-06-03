@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class ChildComponent extends Component
 {
-    public $book;
+    public Book $book;
 
     public EBook $eBook;
 
@@ -18,14 +18,13 @@ class ChildComponent extends Component
         'eBook.author' => 'string',
     ];
 
-    public function mount($book, $initEBook)
+    public function mount($aBook, $initEBook, $book)
     {
         //dd('child mount run first');
 
-
         //book must be an array otherwise livewire won't be able to pass it to the view (as a normal non-eloquent model object)
         //$this->book = ['title' => 'first title after mounting the child', 'author' => 'first author after mounting the child'];
-        $this->book = $book;
+        $this->book = new Book($book->title, $book->author);
         //livewire is able to pass eloquent model object to the view
         //$this->eBook = EBook::inRandomOrder()->first();
         $this->eBook = new EBook($initEBook);
@@ -37,26 +36,19 @@ class ChildComponent extends Component
 
     public function updatedBook()
     {
-        $book = new Book($this->book['title'], $this->book['author']);
 
-        $this->emitUpBook($book);
+        $this->emitUpBook($this->book);
     }
 
     public function updatedEBook()
     {
-        $eBook = new EBook([
-            'title' => $this->eBook->title,
-            'author' => $this->eBook->author,
-        ]);
 
-        $this->emitUpEBook($eBook);
-
+        $this->emitUpEBook($this->eBook);
     }
 
     private function emitUpBook($book)
     {
-        //$this->emit('bookUpdated', $book->toArray());
-
+        $this->emitUp('aBookUpdated', $book->toArray());
         $this->emitUp('bookUpdated', $book);
     }
 
