@@ -10,14 +10,15 @@ class BookChildComponent extends Component
 {
     public Book $book;
 
-    public function mount($book)
+    //rules are not necessary for wireable model
+
+    public function mount(Book $book)
     {
-        $this->book = new Book($book->title, $book->author);
+        $this->book = $book;
     }
 
     public function updatedBook()
     {
-
         $this->emitUpBook($this->book);
     }
 

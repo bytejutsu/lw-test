@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class ABookChildComponent extends Component
 {
-    public $aBook;
+    public $aBook; //type will be hinted as array
 
     public function mount($aBook)
     {
