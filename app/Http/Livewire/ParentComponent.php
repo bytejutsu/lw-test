@@ -9,7 +9,7 @@ use Livewire\Component;
 class ParentComponent extends Component
 {
 
-    public $aBook;
+    public array $aBook;
     public EBook $eBook;
     public Book $book;
 
