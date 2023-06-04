@@ -41,7 +41,6 @@ class ParentComponent extends Component
         //eBookData is an array because it is sent via an emit event => serialized
         $this->eBook->title = $eBookData['title'];
         $this->eBook->author = $eBookData['author'];
-
     }
 
     public function bookUpdated($bookData)
@@ -51,6 +50,8 @@ class ParentComponent extends Component
         $this->book->author = $bookData['author'];
 
         $this->books = BookService::getBooks($this->book->title);
+
+        $this->emitTo('books-list', 'booksUpdated', $this->books);
 
     }
 

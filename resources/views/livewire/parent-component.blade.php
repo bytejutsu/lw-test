@@ -41,7 +41,7 @@
             <div wire:loading.flex>
                 Fetching Books...
             </div>
-            <livewire:books-list wire:key="{{ Str::random() }}" :books="$books"/>
+            <livewire:books-list :books="$books"/>
         </div>
     </div>
 

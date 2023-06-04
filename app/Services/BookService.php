@@ -21,9 +21,7 @@ class BookService
                 $booksData = array_splice($allBooksData, 0, 5);
 
                 // Map the JSON data to an array of Book objects
-                $books = array_map(function ($bookData) {
-                    return new Book($bookData['title'], 'not provided');
-                }, $booksData);
+                $books = array_map(fn ($bookData) => new Book($bookData['title'], 'not provided'), $booksData);
 
                 return $books;
             }

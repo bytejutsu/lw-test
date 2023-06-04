@@ -22,12 +22,8 @@ class EBookChildComponent extends Component
 
     public function updatedEBook()
     {
-        $this->emitUpEBook($this->eBook);
-    }
+        $this->emitUp('eBookUpdated', $this->eBook);
 
-    private function emitUpEBook($eBook)
-    {
-        $this->emitUp('eBookUpdated', $eBook);
     }
 
     public function render()

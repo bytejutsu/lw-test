@@ -19,12 +19,7 @@ class BookChildComponent extends Component
 
     public function updatedBook()
     {
-        $this->emitUpBook($this->book);
-    }
-
-    private function emitUpBook($book)
-    {
-        $this->emitUp('bookUpdated', $book);
+        $this->emitUp('bookUpdated', $this->book);
     }
 
     public function render()
