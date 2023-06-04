@@ -8,22 +8,11 @@
 
     <hr/>
 
-    {{-- notice how you need to use the php $this to access to value in case of a computed property --}}
-
     <p>ABook title letter count : <span class="text-blue-500">{{ $this->aBookTitleLetterCount }}</span></p>
 
     <hr/>
 
     <br/>
-
-    {{--
-    <p>EBook Title: {{ $eBook->title }}</p>
-    <p>EBook Author: {{ $eBook->author }}</p>
-    --}}
-
-    {{-- it also works in the blade view for eloquent model objects to be accessed as arrays --}}
-
-
 
     <p><span class="text-red-500">EBook Title: </span>{{ $eBook['title'] }}</p>
     <p><span class="text-red-500">EBook Author: </span>{{ $eBook['author'] }}</p>
@@ -50,7 +39,7 @@
     {{-- renamed parameter eBook to initEBook to avoid typehinting inside the child component class because $eBook is passed as array --}}
     <div class="flex justify-between">
         <livewire:a-book-child-component :aBook="$aBook"/>
-        <livewire:e-book-child-component :initEBook="$eBook"/>
+        <livewire:e-book-child-component :eBook="$eBook"/>
         <livewire:book-child-component :book="$book"/>
     </div>
 

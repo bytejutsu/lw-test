@@ -15,9 +15,9 @@ class EBookChildComponent extends Component
         'eBook.author' => 'string',
     ];
 
-    public function mount(EBook $initEBook)
+    public function mount(EBook $eBook)
     {
-        $this->eBook = $initEBook;
+        $this->eBook = $eBook;
     }
 
     public function updatedEBook()
