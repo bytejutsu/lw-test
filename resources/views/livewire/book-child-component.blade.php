@@ -20,6 +20,6 @@
     </div>
 
     <div>
-        <livewire:books-list-settings-component/>
+        <livewire:books-search-list-settings-component :showBookImage="true" :maxBooks="5"/>
     </div>
 </div>
