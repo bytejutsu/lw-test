@@ -11,10 +11,10 @@
 
     <div class="flex justify-between">
         <label for="book-title" class="text-green-500">Book Title:</label>
-        <input type="text" id="book-title" wire:model="book.title">
+        <input type="text" id="book-title" wire:model.debounce.200ms="book.title">
     </div>
     <div class="flex justify-between">
         <label for="book-author" class="text-green-500">Book Author:</label>
-        <input type="text" id="book-author" wire:model="book.author">
+        <input type="text" id="book-author" wire:model.debounce.200ms="book.author">
     </div>
 </div>

@@ -37,7 +37,12 @@
             <hr/>
         </div>
 
-        <livewire:books-list wire:key="{{ Str::random() }}" :books="$books"/>
+        <div class="flex flex-col justify-start items-center">
+            <div wire:loading.flex>
+                Fetching Books...
+            </div>
+            <livewire:books-list wire:key="{{ Str::random() }}" :books="$books"/>
+        </div>
     </div>
 
     <br/>
@@ -47,7 +52,5 @@
         <livewire:e-book-child-component :eBook="$eBook"/>
         <livewire:book-child-component :book="$book"/>
     </div>
-
-
 
 </div>
