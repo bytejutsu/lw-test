@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Book;
 use App\Models\EBook;
 use App\Services\BookService;
+use App\Services\EncryptionService;
 use Livewire\Component;
 
 class ParentComponent extends Component
@@ -72,17 +73,14 @@ class ParentComponent extends Component
         return strlen($this->aBook['title']);
     }
 
+    public function getABookTitleProperty()
+    {
+        return self::getEncryptionService()->encrypt($this->aBook['title'], 2);
+        //todo: however i think the value of $this->aBook itself is not updated => so its title too X!!!!
+    }
+
     public function mount()
     {
-        //todo: use the livewire fill method
-
-        /*
-        $this->aBook = ['title' => 'initial aBook title from parent', 'author' => 'initial aBook author from parent'];
-
-        $this->eBook = EBook::inRandomOrder()->first();
-
-        $this->book = new Book('Laravel', 'Matt Stauffer');
-        */
 
         $this->fill([
             'aBook' => ['title' => 'initial aBook title from parent', 'author' => 'initial aBook author from parent'],
@@ -113,4 +111,16 @@ class ParentComponent extends Component
         return self::$serviceInstance;
     }
      */
+
+    protected static $encryptionService;
+
+    public static function getEncryptionService() {
+
+        if (!isset(self::$encryptionService)) {
+            self::$encryptionService = new EncryptionService();
+        }
+
+        return self::$encryptionService;
+    }
+
 }

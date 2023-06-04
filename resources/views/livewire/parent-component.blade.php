@@ -10,7 +10,7 @@
     <div class="flex flex-row justify-between">
         <div class="basis-1/2 flex flex-col">
             <div class="w-fit bg-blue-500 text-white text-sm font-bold p-2 ">Encryption Service</div>
-            <p><span class="text-blue-500">ABook Title:</span> {{ $aBook['title'] }}</p>
+            <p><span class="text-blue-500">ABook Title:</span> {{ $this->aBookTitle }}</p>
             <p><span class="text-blue-500">ABook Author:</span> {{ $aBook['author'] }}</p>
 
             <hr/>
