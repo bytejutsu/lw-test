@@ -8,6 +8,7 @@
         <label for="e-book-title" class="text-red-500">EBook Title:</label>
         <input type="text" id="e-book-title" wire:model="eBook.title">
     </div>
+    <br/>
     <div class="flex justify-between">
         <label for="e-book-author" class="text-red-500">EBook Author:</label>
         <input type="text" id="e-book-author" wire:model="eBook.author">

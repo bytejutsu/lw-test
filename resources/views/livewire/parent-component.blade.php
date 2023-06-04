@@ -9,6 +9,7 @@
 
     <div class="flex flex-row justify-between">
         <div class="basis-1/2 flex flex-col">
+            <div class="w-fit bg-blue-500 text-white text-sm font-bold p-2 ">Encryption Service</div>
             <p><span class="text-blue-500">ABook Title:</span> {{ $aBook['title'] }}</p>
             <p><span class="text-blue-500">ABook Author:</span> {{ $aBook['author'] }}</p>
 
@@ -20,6 +21,7 @@
 
             <br/>
 
+            <div class="w-fit bg-red-500 text-white text-sm font-bold p-2 ">Database Service</div>
             <p><span class="text-red-500">EBook Title: </span>{{ $eBook['title'] }}</p>
             <p><span class="text-red-500">EBook Author: </span>{{ $eBook['author'] }}</p>
 
@@ -31,6 +33,7 @@
 
             <br/>
 
+            <div class="w-fit bg-green-500 text-white text-sm font-bold p-2 ">API Service</div>
             <p><span class="text-green-500">Book Title: </span>{{ $book->title }}</p>
             <p><span class="text-green-500">Book Author: </span>{{ $book->author }}</p>
 

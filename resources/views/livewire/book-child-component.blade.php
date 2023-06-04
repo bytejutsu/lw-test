@@ -13,8 +13,13 @@
         <label for="book-title" class="text-green-500">Book Title:</label>
         <input type="text" id="book-title" wire:model.debounce.200ms="book.title">
     </div>
+    <br/>
     <div class="flex justify-between">
         <label for="book-author" class="text-green-500">Book Author:</label>
         <input type="text" id="book-author" wire:model.debounce.200ms="book.author">
+    </div>
+
+    <div>
+        <livewire:books-list-settings-component/>
     </div>
 </div>
