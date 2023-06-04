@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Book;
 use Livewire\Component;
 
-class BooksList extends Component
+class BooksListComponent extends Component
 {
     public array $books;
 
@@ -24,6 +24,6 @@ class BooksList extends Component
 
     public function render()
     {
-        return view('livewire.books-list');
+        return view('livewire.books-list-component');
     }
 }

@@ -51,7 +51,8 @@ class ParentComponent extends Component
 
         $this->books = BookService::getBooks($this->book->title);
 
-        $this->emitTo('books-list', 'booksUpdated', $this->books);
+        //todo: maybe track the components names with constants or enums !!!!
+        $this->emitTo('books-list-component', 'booksUpdated', $this->books);
 
     }
 
