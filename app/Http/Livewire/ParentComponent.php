@@ -76,11 +76,19 @@ class ParentComponent extends Component
     {
         //todo: use the livewire fill method
 
+        /*
         $this->aBook = ['title' => 'initial aBook title from parent', 'author' => 'initial aBook author from parent'];
 
         $this->eBook = EBook::inRandomOrder()->first();
 
         $this->book = new Book('Laravel', 'Matt Stauffer');
+        */
+
+        $this->fill([
+            'aBook' => ['title' => 'initial aBook title from parent', 'author' => 'initial aBook author from parent'],
+            'eBook' => EBook::inRandomOrder()->first(),
+            'book' => new Book('Laravel', 'Matt Stauffer')
+        ]);
 
         $this->books = BookService::getBooks($this->book->title);
 
