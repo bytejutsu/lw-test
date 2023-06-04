@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Book;
 use App\Models\EBook;
+use App\Services\BookService;
 use Livewire\Component;
 
 class ParentComponent extends Component
@@ -12,6 +13,8 @@ class ParentComponent extends Component
     public array $aBook;
     public EBook $eBook;
     public Book $book;
+
+    public array $books;
 
     //NOTE: !!!!! all private state will not persist because it is private: so after listener fires it will be lost !!!!!
     // you have to make it public so it persists even you are using it internally only
@@ -36,15 +39,20 @@ class ParentComponent extends Component
     public function eBookUpdated($eBookData)
     {
         //eBookData is an array because it is sent via an emit event => serialized
-        $this->eBook = new EBook($eBookData);
+        $this->eBook->title = $eBookData['title'];
+        $this->eBook->author = $eBookData['author'];
+
     }
 
     public function bookUpdated($bookData)
     {
         //bookData is an array because it is sent via an emit event => serialized
-        $this->book = new Book($bookData['title'], $bookData['author']);
-    }
+        $this->book->title = $bookData['title'];
+        $this->book->author = $bookData['author'];
 
+        $this->books = BookService::getBooks($this->book->title);
+
+    }
 
     public function getBookTitleLetterCountProperty()
     {
@@ -70,11 +78,29 @@ class ParentComponent extends Component
 
         $this->eBook = EBook::inRandomOrder()->first();
 
-        $this->book = new Book('initial book title from parent', 'initial book author from parent');
+        $this->book = new Book('Laravel', 'Matt Stauffer');
+
+        $this->books = BookService::getBooks($this->book->title);
+
     }
 
     public function render()
     {
         return view('livewire.parent-component');
     }
+
+    /*
+     * alternative method to use a service inside a livewire component
+     *
+    protected static $serviceInstance;
+
+    public static function getServiceInstance() {
+
+        if (!isset(self::$serviceInstance)) {
+            self::$serviceInstance = new Service();
+        }
+
+        return self::$serviceInstance;
+    }
+     */
 }
