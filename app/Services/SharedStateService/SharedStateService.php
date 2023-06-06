@@ -62,7 +62,7 @@ class SharedStateService
     //                                 if the function reads => it should getCache at the beginning
 
 
-    public static function exist($key) : bool
+    public static function has($key) : bool
     {
         $cachedSharedData = self::readDataFromCache();
 
@@ -78,7 +78,7 @@ class SharedStateService
     {
         $cachedSharedData = self::readDataFromCache();
 
-        if(self::exist($key))
+        if(self::has($key))
         {
             return $cachedSharedData[$key];
         }
@@ -113,7 +113,7 @@ class SharedStateService
      */
     public static function putIfNotExist($key, $value, $throwExceptionIfExist = true)
     {
-        if(!self::exist($key))
+        if(!self::has($key))
         {
             self::$sharedData[$key] = new StateSubject($key, $value) ;
             self::writeDataToCache();
@@ -144,7 +144,7 @@ class SharedStateService
      */
     public static function updateIfExists($key, $value)
     {
-        if(self::exist($key))
+        if(self::has($key))
         {
             self::update($key, $value);
         }
