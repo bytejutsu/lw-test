@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\SharedStateService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
+use App\Services\SharedStateService\SharedStateService;
 
 class FirstController extends Controller
 {

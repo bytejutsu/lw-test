@@ -7,7 +7,7 @@ use App\Models\EBook;
 use App\Services\BookService;
 use App\Services\EmailService\EmailService;
 use App\Services\EncryptionService;
-use App\Services\SharedStateService;
+use App\Services\SharedStateService\SharedStateService;
 use Livewire\Component;
 
 class ParentComponent extends Component
@@ -75,16 +75,20 @@ class ParentComponent extends Component
         //todo: however i think the value of $this->aBook itself is not updated => so its title too X!!!!
     }
 
-    public function sendBookListEmail(EmailService $emailService, SharedStateService $sharedStateService)
+    public function sendBookListEmail(EmailService $emailService)
     {
 
-        $books = $sharedStateService->get('books');
+        $books = SharedStateService::get('books');
 
         //dd($books);
 
         //$books = BookService::getBooks($this->book->title);
 
-        $emailService->sendBookListEmail($books, $this->email);
+        try{
+            $emailService->sendBookListEmail($books, $this->email);
+        }catch(\Exception $e){
+            dd($e->getMessage());
+        }
 
         // Clear the email input field after sending the email
         $this->email = '';
@@ -93,7 +97,7 @@ class ParentComponent extends Component
         // $sharedStateService->setSharedData('books', []);
     }
 
-    public function mount(SharedStateService $sharedStateService)
+    public function mount()
     {
 
         $this->fill([
@@ -102,7 +106,7 @@ class ParentComponent extends Component
             'book' => new Book('Laravel', 'Matt Stauffer')
         ]);
 
-        $sharedStateService->put('books', BookService::getBooks($this->book->title));
+        SharedStateService::put('books', BookService::getBooks($this->book->title));
 
         $this->email = "";
     }

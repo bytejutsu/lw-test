@@ -2,9 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\SharedStateService;
-use Illuminate\Contracts\Support\DeferrableProvider;
-use Illuminate\Support\Facades\Cache;
+use App\Services\SharedStateService\SharedStateService;
 use Illuminate\Support\ServiceProvider;
 
 class SharedStateServiceProvider extends ServiceProvider
@@ -15,7 +13,7 @@ class SharedStateServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(SharedStateService::class, function ($app) {
-            return new SharedStateService();
+            return SharedStateService::getInstance();
         });
     }
 

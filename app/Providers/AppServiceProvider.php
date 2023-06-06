@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Services\SharedStateService;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
