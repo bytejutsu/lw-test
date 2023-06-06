@@ -19,7 +19,9 @@ class BookChildComponent extends Component
 
     public function updatedBook()
     {
-        $this->emitUp('bookUpdated', $this->book);
+        //todo: maybe track the components names with constants or enums !!!!
+        $this->emitTo('parent-component', 'bookUpdated', $this->book);
+        $this->emitTo('book-list-component', 'bookUpdated', $this->book);
     }
 
     public function render()

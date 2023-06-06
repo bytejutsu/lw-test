@@ -48,7 +48,7 @@
             <div wire:loading.flex class="font-bold text-gray-400 justify-center">
                 Fetching Books...
             </div>
-            <livewire:books-list-component :books="$books"/>
+            <livewire:book-list-component/>
         </div>
     </div>
 
@@ -58,6 +58,12 @@
         <livewire:a-book-child-component :aBook="$aBook"/>
         <livewire:e-book-child-component :eBook="$eBook"/>
         <livewire:book-child-component :book="$book"/>
+    </div>
+
+    <div class="flex justify-center items-center space-x-2">
+        <label for="email" class="tracking-wide font-bold">Email:</label>
+        <input id="email" type="email" wire:model="email">
+        <button wire:click.prevent="sendBookListEmail" class="bg-orange-300 text-white font-bold p-2 m-2 shadow-lg">Send Books List</button>
     </div>
 
 </div>

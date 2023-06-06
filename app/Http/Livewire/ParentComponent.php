@@ -5,7 +5,9 @@ namespace App\Http\Livewire;
 use App\Models\Book;
 use App\Models\EBook;
 use App\Services\BookService;
+use App\Services\EmailService\EmailService;
 use App\Services\EncryptionService;
+use App\Services\SharedStateService;
 use Livewire\Component;
 
 class ParentComponent extends Component
@@ -15,7 +17,7 @@ class ParentComponent extends Component
     public EBook $eBook;
     public Book $book;
 
-    public array $books;
+    public string $email;
 
     //NOTE: !!!!! all private state will not persist because it is private: so after listener fires it will be lost !!!!!
     // you have to make it public so it persists even you are using it internally only
@@ -49,12 +51,6 @@ class ParentComponent extends Component
         //bookData is an array because it is sent via an emit event => serialized
         $this->book->title = $bookData['title'];
         $this->book->author = $bookData['author'];
-
-        $this->books = BookService::getBooks($this->book->title);
-
-        //todo: maybe track the components names with constants or enums !!!!
-        $this->emitTo('books-list-component', 'booksUpdated', $this->books);
-
     }
 
     public function getBookTitleLetterCountProperty()
@@ -79,7 +75,25 @@ class ParentComponent extends Component
         //todo: however i think the value of $this->aBook itself is not updated => so its title too X!!!!
     }
 
-    public function mount()
+    public function sendBookListEmail(EmailService $emailService, SharedStateService $sharedStateService)
+    {
+
+        $books = $sharedStateService->get('books');
+
+        //dd($books);
+
+        //$books = BookService::getBooks($this->book->title);
+
+        $emailService->sendBookListEmail($books, $this->email);
+
+        // Clear the email input field after sending the email
+        $this->email = '';
+
+        // Alternatively, you can clear the books data if needed
+        // $sharedStateService->setSharedData('books', []);
+    }
+
+    public function mount(SharedStateService $sharedStateService)
     {
 
         $this->fill([
@@ -88,8 +102,9 @@ class ParentComponent extends Component
             'book' => new Book('Laravel', 'Matt Stauffer')
         ]);
 
-        $this->books = BookService::getBooks($this->book->title);
+        $sharedStateService->put('books', BookService::getBooks($this->book->title));
 
+        $this->email = "";
     }
 
     public function render()
@@ -112,6 +127,7 @@ class ParentComponent extends Component
     }
      */
 
+    //-----------------------------------------------------------
     protected static $encryptionService;
 
     public static function getEncryptionService() {
@@ -122,5 +138,18 @@ class ParentComponent extends Component
 
         return self::$encryptionService;
     }
+    //----------------------------------------------------------
 
+    /*
+    protected static $sharedStateService;
+
+    public static function getSharedStateService() {
+
+        if (!isset(self::$sharedStateService)) {
+            self::$sharedStateService = SharedStateService::getInstance();
+        }
+
+        return self::$sharedStateService;
+    }
+    */
 }
