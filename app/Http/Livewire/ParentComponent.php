@@ -8,6 +8,7 @@ use App\Services\BookService;
 use App\Services\EmailService\EmailService;
 use App\Services\EncryptionService;
 use App\Services\SharedStateService\SharedStateService;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 
 class ParentComponent extends Component
@@ -97,7 +98,7 @@ class ParentComponent extends Component
         // $sharedStateService->setSharedData('books', []);
     }
 
-    public function mount()
+    public function mount(SharedStateService $sharedStateService) //todo: this must be called at least one time so SharedStateService resolves :(
     {
 
         $this->fill([

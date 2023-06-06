@@ -9,7 +9,7 @@ class FirstController extends Controller
 
     public function index(SharedStateService $sharedStateService)
     {
-        $books = $sharedStateService->get('books') ?? [];
+        $books = $sharedStateService->getState('books') ?? [];
 
         //
 
