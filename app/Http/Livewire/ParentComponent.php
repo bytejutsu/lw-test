@@ -50,8 +50,14 @@ class ParentComponent extends Component
     {
         //bookData is an array because it is sent via an emit event => serialized
 
-        $this->book->title = $bookData['title'];
-        $this->book->author = $bookData['author'];
+        if(isset($this->book)){
+            $this->book->title = $bookData['title'];
+            $this->book->author = $bookData['author'];
+        }else{
+            $this->book = new Book($bookData['title'], $bookData['author']);
+        }
+
+
     }
 
     public function getBookTitleLetterCountProperty()
@@ -81,10 +87,6 @@ class ParentComponent extends Component
 
         $books = SharedStateService::get('books');
 
-        //dd($books);
-
-        //$books = BookService::getBooks($this->book->title);
-
         try{
             $emailService->sendBookListEmail($books, $this->email);
         }catch(\Exception $e){
@@ -93,9 +95,6 @@ class ParentComponent extends Component
 
         // Clear the email input field after sending the email
         $this->email = '';
-
-        // Alternatively, you can clear the books data if needed
-        // $sharedStateService->setSharedData('books', []);
     }
 
     public function mount(SharedStateService $sharedStateService) //todo: this must be called at least one time so SharedStateService resolves :(
@@ -103,10 +102,8 @@ class ParentComponent extends Component
         $this->fill([
             'aBook' => ['title' => 'initial aBook title from parent', 'author' => 'initial aBook author from parent'],
             'eBook' => EBook::inRandomOrder()->first(),
-            'book' => new Book('Laravel', 'Matt Stauffer')
+            //'book' => new Book('', '')
         ]);
-
-        SharedStateService::put('books', BookService::getBooks($this->book->title));
 
         $this->email = "";
 

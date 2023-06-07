@@ -1,4 +1,4 @@
-<div class="border-2 border-green-500 p-4 m-4"> {{-- wire:init="initialize" --}}
+<div wire:init="e" class="border-2 border-green-500 p-4 m-4"> {{-- wire:init="initialize" --}}
 
     {{-- initialize will be called on init so the child-component properties will be emitted to the parent --}}
 

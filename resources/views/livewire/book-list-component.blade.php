@@ -6,11 +6,15 @@
     <br/>
 
     <div class="">
+        @if(isset($books))
         <ul>
             @foreach($books as $book)
             <li class="font-bold p-2">{{$book->title}}</li>
             @endforeach
         </ul>
+        @else
+            <p class="font-bold p-2 text-center">Loading ...</p>
+        @endif
     </div>
 
 </div>

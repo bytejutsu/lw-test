@@ -34,12 +34,11 @@
             <br/>
 
             <div class="w-fit bg-green-500 text-white text-sm font-bold p-2 ">API Service</div>
-            <p><span class="text-green-500">Book Title: </span>{{ $book->title }}</p>
-            <p><span class="text-green-500">Book Author: </span>{{ $book->author }}</p>
 
+            <p><span class="text-green-500">Book Title: </span>@if(isset($book)){{ $book->title }}@else Loading Book ... @endif</p>
+            <p><span class="text-green-500">Book Author: </span>@if(isset($book)){{ $book->author }}@else Loading Book ... @endif</p>
             <hr/>
-
-            <p>Book title letter count : <span class="text-green-500">{{ $this->bookTitleLetterCount }}</span></p>
+            <p>Book title letter count : <span class="text-green-500 font-bold">@if(isset($book)){{ $this->bookTitleLetterCount }}@else Loading Book ... @endif </span></p>
 
             <hr/>
         </div>
@@ -57,7 +56,7 @@
     <div class="flex justify-between">
         <livewire:a-book-child-component :aBook="$aBook"/>
         <livewire:e-book-child-component :eBook="$eBook"/>
-        <livewire:book-child-component :book="$book"/>
+        <livewire:book-child-component/>
     </div>
 
     <div class="flex justify-center items-center space-x-2">

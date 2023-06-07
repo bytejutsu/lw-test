@@ -13,15 +13,21 @@ class BookChildComponent extends Component
 
     //rules are not necessary for wireable model
 
-    public function mount(Book $book)
+    public function mount()
     {
-        $this->book = $book;
+        $this->book = new Book("Laravel", "Matt Stauffer");
     }
 
     public function updatedBook()
     {
         //todo: maybe track the components names with constants or enums !!!!
 
+        $this->e();
+
+    }
+
+    public function e()
+    {
         $this->emitTo('parent-component', 'bookUpdated', $this->book);
 
         $this->emitTo('book-list-component', 'bookUpdated', $this->book);

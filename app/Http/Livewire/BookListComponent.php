@@ -14,7 +14,7 @@ class BookListComponent extends Component
 
     public function mount()
     {
-        $this->books = SharedStateService::get('books');;
+        //SharedStateService::put('books', $this->books);
     }
 
     public function bookUpdated($bookData)
