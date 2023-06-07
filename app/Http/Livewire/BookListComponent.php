@@ -12,9 +12,9 @@ class BookListComponent extends Component
 
     protected $listeners = ['bookUpdated'];
 
-    public function mount(SharedStateService $sharedStateService)
+    public function mount()
     {
-        $this->books = $sharedStateService->get('books');;
+        $this->books = SharedStateService::get('books');;
     }
 
     public function bookUpdated($bookData)
@@ -22,8 +22,8 @@ class BookListComponent extends Component
         //this is an event listener so the data it receives is serialized and needs to be converted back to an array of objects
 
         $this->books = BookService::getBooks($bookData['title']);
-
-        SharedStateService::put('books', $this->books);
+        //SharedStateService::put('books', $this->books);
+        SharedStateService::update('books', $this->books);
     }
 
     public function render()

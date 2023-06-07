@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Book;
 use App\Models\EBook;
+use App\Services\SharedStateService\SharedStateService;
 use Livewire\Component;
 
 class BookChildComponent extends Component
@@ -20,7 +21,9 @@ class BookChildComponent extends Component
     public function updatedBook()
     {
         //todo: maybe track the components names with constants or enums !!!!
+
         $this->emitTo('parent-component', 'bookUpdated', $this->book);
+
         $this->emitTo('book-list-component', 'bookUpdated', $this->book);
     }
 

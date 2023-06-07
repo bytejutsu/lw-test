@@ -8,7 +8,6 @@ use App\Services\BookService;
 use App\Services\EmailService\EmailService;
 use App\Services\EncryptionService;
 use App\Services\SharedStateService\SharedStateService;
-use Illuminate\Support\Facades\Cache;
 use Livewire\Component;
 
 class ParentComponent extends Component
@@ -50,6 +49,7 @@ class ParentComponent extends Component
     public function bookUpdated($bookData)
     {
         //bookData is an array because it is sent via an emit event => serialized
+
         $this->book->title = $bookData['title'];
         $this->book->author = $bookData['author'];
     }
@@ -100,7 +100,6 @@ class ParentComponent extends Component
 
     public function mount(SharedStateService $sharedStateService) //todo: this must be called at least one time so SharedStateService resolves :(
     {
-
         $this->fill([
             'aBook' => ['title' => 'initial aBook title from parent', 'author' => 'initial aBook author from parent'],
             'eBook' => EBook::inRandomOrder()->first(),
@@ -110,6 +109,7 @@ class ParentComponent extends Component
         SharedStateService::put('books', BookService::getBooks($this->book->title));
 
         $this->email = "";
+
     }
 
     public function render()

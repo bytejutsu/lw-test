@@ -5,7 +5,7 @@ namespace App\Services\SharedStateService;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
-class SharedStateService
+class SharedStateServicePlus
 {
     private static $instance;
 
@@ -18,15 +18,25 @@ class SharedStateService
 
         if (!Cache::has(self::$cacheKey)) {
 
-            // Convert session duration from seconds to minutes
+             // Convert session duration from seconds to minutes
 
             Cache::put(self::$cacheKey, $data, self::$duration); // Cache for 60 minutes
 
         }
 
+        //$this->data = Cache::get(self::$cacheKey);
+
         self::$sharedData = Cache::get(self::$cacheKey);
     }
 
+
+    /*
+    private function __construct()
+    {
+        // Private constructor to prevent direct instantiation
+        $this->sharedData = [];
+    }
+    */
 
     public static function getInstance($data = []) //maybe remove the option of passing an array because the array should guarantee integrity
     {
@@ -66,12 +76,14 @@ class SharedStateService
      * @throws \Exception
      */
 
-    private static function getState($key, $throwExceptionIfNotExist = true)
+    //make this method public only for certain classes and private in others
+    public static function getStateSubjectInstance($key, $throwExceptionIfNotExist = true)
     {
         $cachedSharedData = self::readDataFromCache();
 
         if(self::has($key))
         {
+
             return $cachedSharedData[$key];
         }
 
@@ -83,14 +95,42 @@ class SharedStateService
         return null;
     }
 
+    private static function getState($key)
+    {
+        return self::getStateSubjectInstance($key)->getState();
+    }
+
     public static function get($key)
     {
         return self::getState($key);
     }
 
+    //!!!!there is problem in this method because it is observers are being overriden everytime a new instance gets created
+
+
     public static function put($key, $value)
     {
-        self::$sharedData[$key] = $value;
+        //!!!!there is problem in this method because it is observers are being overriden everytime a new instance gets created
+
+        $observers = [];
+
+        if(self::has($key))
+        {
+            $data = self::$sharedData[$key];
+
+            if($data instanceof StateSubject)
+            {
+                $observers = $data->getObservers();
+            }
+
+        }
+
+        //!!!!there is problem in this method because it is observers are being overriden everytime a new instance gets created
+
+
+        Log::debug($observers);
+
+        self::$sharedData[$key] = new StateSubject($key, $value, $observers);
 
         self::writeDataToCache();
     }
@@ -122,12 +162,10 @@ class SharedStateService
 
         //dd(self::getStateSubjectInstance($key)->getObservers());
 
-        //in normal SharedStateService it is the same as put
-
         self::put($key, $value);
 
 
-        //self::getStateSubjectInstance($key)->setState($value);
+        self::getStateSubjectInstance($key)->setState($value);
 
     }
 
