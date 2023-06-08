@@ -23,6 +23,20 @@
             {{$slot}}
         </div>
 
+
+        {{-- Scripts --}}
+
         @livewireScripts
+
+        {{-- don't show livewire errors on production --}}
+
+        @production
+            <script>
+                Livewire.onError(function (message, response) {
+                    return false;
+                });
+            </script>
+        @endproduction
+
     </body>
 </html>
