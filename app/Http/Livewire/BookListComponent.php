@@ -30,7 +30,7 @@ class BookListComponent extends Component
     }
 
 
-    //TODO: report bug on livewire repo!: live the following two listener methods empty
+    //TODO: report bug on livewire repo!: leave the following two listener methods empty
     // and the books property will no longer be an array of wireable objects instead an array of arrays
 
     public function showBookImageUpdated($showBookImageData)
