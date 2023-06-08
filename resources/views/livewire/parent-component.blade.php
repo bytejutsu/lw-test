@@ -44,9 +44,6 @@
         </div>
 
         <div class="basis-1/2 flex flex-col justify-start items-stretch">
-            <div wire:loading.flex class="font-bold text-gray-400 justify-center">
-                Fetching Books...
-            </div>
             <livewire:book-list-component/>
         </div>
     </div>

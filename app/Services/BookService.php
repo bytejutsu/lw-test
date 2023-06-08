@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Book;
+use App\Models\WireableBook;
 use Illuminate\Support\Facades\Http;
 
 class BookService
@@ -21,16 +21,21 @@ class BookService
                 $booksData = array_splice($allBooksData, 0, 5);
 
                 // Map the JSON data to an array of Book objects
-                $books = array_map(fn ($bookData) => new Book($bookData['title'], 'not provided'), $booksData);
+                $books = array_map(fn ($bookData) => new WireableBook($bookData['title'], 'not provided'), $booksData);
 
                 return $books;
+                //return Collection::make($books);
+
             }
 
             // If the request was not successful, you can handle the error accordingly
             // For example, you can throw an exception or return an empty array
+
             return [];
+            //return Collection::make([]);
         }
 
         return [];
+        //return Collection::make([]);
     }
 }

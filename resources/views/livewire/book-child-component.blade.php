@@ -1,4 +1,4 @@
-<div wire:init="e" class="border-2 border-green-500 p-4 m-4"> {{-- wire:init="initialize" --}}
+<div wire:init="notify" class="border-2 border-green-500 p-4 m-4"> {{-- wire:init="initialize" --}}
 
     {{-- initialize will be called on init so the child-component properties will be emitted to the parent --}}
 
@@ -20,6 +20,6 @@
     </div>
 
     <div>
-        <livewire:books-search-list-settings-component :showBookImage="true" :maxBooks="5"/>
+        <livewire:book-search-list-settings-component/>
     </div>
 </div>

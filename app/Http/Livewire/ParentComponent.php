@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Book;
+use App\Models\WireableBook;
 use App\Models\EBook;
 use App\Services\BookService;
 use App\Services\EmailService\EmailService;
@@ -15,7 +15,7 @@ class ParentComponent extends Component
 
     public array $aBook;
     public EBook $eBook;
-    public Book $book;
+    public WireableBook $book;
 
     public string $email;
 
@@ -54,9 +54,8 @@ class ParentComponent extends Component
             $this->book->title = $bookData['title'];
             $this->book->author = $bookData['author'];
         }else{
-            $this->book = new Book($bookData['title'], $bookData['author']);
+            $this->book = new WireableBook($bookData['title'], $bookData['author']);
         }
-
 
     }
 
@@ -113,6 +112,8 @@ class ParentComponent extends Component
     {
         return view('livewire.parent-component');
     }
+
+    //todo: clear/destroy the shared state when the parent component gets dismounted/destroyed
 
     /*
      * alternative method to use a service inside a livewire component

@@ -7,11 +7,14 @@
 
     <div class="">
         @if(isset($books))
-        <ul>
-            @foreach($books as $book)
-            <li class="font-bold p-2">{{$book->title}}</li>
-            @endforeach
-        </ul>
+            <div wire:loading.flex class="font-bold text-gray-400 justify-center">Fetching Books...</div>
+            <div wire:loading.remove>
+                <ul>
+                    @foreach($books as $book)
+                        <li class="font-bold p-2">{{$book->title}}</li>
+                    @endforeach
+                </ul>
+            </div>
         @else
             <p class="font-bold p-2 text-center">Loading ...</p>
         @endif

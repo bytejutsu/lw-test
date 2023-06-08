@@ -1,4 +1,4 @@
-<div class="border-4 border-green-700 p-4 m-4">
+<div wire:init="notify" class="border-4 border-green-700 p-4 m-4">
     <h2 class="text-center font-bold text-green-700">Books Search List Settings Component</h2>
     <br/>
     <div class="flex flex-col space-y-2">
