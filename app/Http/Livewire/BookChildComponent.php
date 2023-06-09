@@ -19,7 +19,7 @@ class BookChildComponent extends Component
     // that are stored in the browser locally
     //
     protected $rules = [
-      'book.*' => 'string|max:4' //use * to validate all attributes of the book
+      'book.*' => 'string|max:16' //use * to validate all attributes of the book
     ];
 
     public function mount()
