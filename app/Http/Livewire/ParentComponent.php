@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\WireableBook;
 use App\Models\EBook;
-use App\Services\BookService;
+use App\Models\WireableBook;
+use App\Services\BookService\BookService;
 use App\Services\EmailService\EmailService;
 use App\Services\EncryptionService;
 use App\Services\SharedStateService\SharedStateService;
@@ -28,6 +28,8 @@ class ParentComponent extends Component
     protected $rules = [
         'eBook.title' => 'string',
         'eBook.author' => 'string',
+
+        'email' => 'required|email',
     ];
 
 
@@ -81,10 +83,31 @@ class ParentComponent extends Component
         //todo: however i think the value of $this->aBook itself is not updated => so its title too X!!!!
     }
 
-    public function sendBookListEmail(EmailService $emailService)
+    public function handleSendClick()
     {
 
-        $books = SharedStateService::get('books');
+        $this->validate();
+
+        $emailService = app(\App\Services\EmailService\EmailService::class);
+
+        $this->sendBookListEmail($emailService);
+
+        // Clear the email input field after sending the email
+        //todo: find out why this doesn't work an raises an error //$this->reset('email');
+        $this->email = '';
+    }
+
+    private function sendBookListEmail(EmailService $emailService)
+    {
+        $book =  session('book', new WireableBook('',''));
+
+        $books = [];
+
+        try{
+            $books = BookService::getBooks($book->title);
+        }catch(\Exception $e){
+            dd($e->getMessage());
+        }
 
         try{
             $emailService->sendBookListEmail($books, $this->email);
@@ -92,8 +115,7 @@ class ParentComponent extends Component
             dd($e->getMessage());
         }
 
-        // Clear the email input field after sending the email
-        $this->email = '';
+
     }
 
     public function mount(SharedStateService $sharedStateService) //todo: this must be called at least one time so SharedStateService resolves :(

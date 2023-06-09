@@ -2,11 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\WireableBook;
-use App\Services\BookService;
-use App\Services\SharedStateService\SharedStateService;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Log;
+use App\Services\BookService\BookService;
 use Livewire\Component;
 
 class BookListComponent extends Component
@@ -26,7 +22,6 @@ class BookListComponent extends Component
 
         $this->books = BookService::getBooks($bookData['title']);
 
-        //SharedStateService::update('books', $this->books);
     }
 
 

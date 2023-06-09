@@ -9,6 +9,12 @@ class BookSearchListSettingsComponent extends Component
     public bool $showBookImage;
     public int $maxBooks;
 
+    protected $rules = [
+        'maxBooks' => 'required|int|between:1,5', //in order for the range validation to work the type validation int
+                                                  //must be specified
+        'showBookImage' => 'required|boolean'
+    ];
+
     public function mount()
     {
         $this->showBookImage = true;
@@ -17,11 +23,17 @@ class BookSearchListSettingsComponent extends Component
 
     public function updatedShowBookImage()
     {
+        $this->validateOnly('showBookImage');
+
         $this->notifyAboutShowBookImage();
     }
 
     public function updatedMaxBooks()
     {
+        $this->validateOnly('maxBooks');
+
+        //$this->validate();
+
         $this->notifyAboutMaxBooks();
     }
 

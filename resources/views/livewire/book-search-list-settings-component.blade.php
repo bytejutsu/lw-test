@@ -21,5 +21,10 @@
             <option value="4">4</option>
             <option value="5">5</option>
         </select>
+
+        @error('maxBooks') <p class="w-52 text-sm text-red-600 font-bold overflow-auto whitespace-normal">{{ $message }}</p> @enderror
+
+        @error('showBookImage') <p class="w-52 text-sm text-red-600 font-bold overflow-auto whitespace-normal">{{ $message }}</p> @enderror
+
     </div>
 </div>

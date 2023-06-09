@@ -58,8 +58,11 @@
 
     <div class="flex justify-center items-center space-x-2">
         <label for="email" class="tracking-wide font-bold">Email:</label>
-        <input id="email" type="email" wire:model="email">
-        <button wire:click.prevent="sendBookListEmail" class="bg-orange-300 text-white font-bold p-2 m-2 shadow-lg">Send Books List</button>
+        <div class="flex flex-col justify-center items-center space-y-1">
+            <input id="email" type="email" wire:model="email">
+            @error('email') <p class="text-sm text-red-600 font-bold">{{ $message }}</p> @enderror
+        </div>
+        <button wire:click.prevent="handleSendClick" class="bg-orange-300 text-white font-bold p-2 m-2 shadow-lg">Send Books List</button>
     </div>
 
 </div>

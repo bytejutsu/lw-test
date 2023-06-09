@@ -13,6 +13,15 @@ class BookChildComponent extends Component
 
     //rules are not necessary for wireable model
 
+    // we added those rules to test if they can be bypassed when
+    // the user alters the book.title and book.author from the local storage
+    // as now the book.title and book.author are bound with alpine.js properties
+    // that are stored in the browser locally
+    //
+    protected $rules = [
+      'book.*' => 'string|max:4' //use * to validate all attributes of the book
+    ];
+
     public function mount()
     {
         $this->book = new WireableBook("Laravel", "Matt Stauffer");
@@ -20,7 +29,9 @@ class BookChildComponent extends Component
 
     public function updatedBook()
     {
-        //todo: maybe track the components names with constants or enums !!!!
+        $this->validateOnly('book.*'); //this works only because we used 'book.*' in the rules if not it won't work
+
+        session(['book' => $this->book]);
 
         $this->notifyAboutBook();
 
@@ -28,6 +39,8 @@ class BookChildComponent extends Component
 
     private function notifyAboutBook()
     {
+        //todo: maybe track the components names with constants or enums !!!!
+
         $this->emitTo('parent-component', 'bookUpdated', $this->book);
 
         $this->emitTo('book-list-component', 'bookUpdated', $this->book);

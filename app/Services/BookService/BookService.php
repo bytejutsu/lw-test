@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\BookService;
 
 use App\Models\WireableBook;
 use Illuminate\Support\Facades\Http;
