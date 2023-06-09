@@ -104,7 +104,7 @@ class ParentComponent extends Component
         $books = [];
 
         try{
-            $books = BookService::getBooks($book->title);
+            $books = BookService::getWireableBooks($book->title);
         }catch(\Exception $e){
             dd($e->getMessage());
         }
