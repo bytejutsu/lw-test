@@ -100,17 +100,19 @@ class ParentComponent extends Component
     private function sendBookListEmail(EmailService $emailService)
     {
         $book =  session('book', new WireableBook('',''));
+        $showBookImage = session('showBookImage', true);
+        $maxBooks = session('maxBooks', 5);
 
         $books = [];
 
         try{
-            $books = BookService::getWireableBooks($book->title);
+            $books = BookService::getArrayBooksWithImage($book->title, $maxBooks);
         }catch(\Exception $e){
             dd($e->getMessage());
         }
 
         try{
-            $emailService->sendBookListEmail($books, $this->email);
+            $emailService->sendBookListEmail($this->email, $books, $showBookImage);
         }catch(\Exception $e){
             dd($e->getMessage());
         }

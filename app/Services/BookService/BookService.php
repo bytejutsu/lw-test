@@ -66,6 +66,7 @@ class BookService
         return [];
     }
 
+    /*
     public static function getArrayBooksWithImage($bookTitle, $maxBooks = 5)
     {
         $apiUrl = 'https://api.itbook.store/1.0';
@@ -94,5 +95,20 @@ class BookService
         //dd($books);
 
         return array_splice( $books, 0, $maxBooks);
+    }
+    */
+
+    public static function getArrayBooksWithImage($bookTitle, $maxBooks = 5)
+    {
+        /*
+        return [
+                    ['title' => 'book title 1','image' => 'book image 1'],
+                    ['title' => 'book title 2','image' => 'book image 2'],
+                    ['title' => 'book title 3','image' => 'book image 3'],
+                ];
+
+        */
+
+        return ['books array from service'];
     }
 }

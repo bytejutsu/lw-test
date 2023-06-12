@@ -18,7 +18,7 @@
     <div class="flex justify-between">
         <label for="book-title" class="text-green-500">Book Title:</label>
         <div class="flex flex-col justify-center items-center space-y-1">
-            <input type="text" id="book-title" wire:model.debounce.200ms="book.title">
+            <input type="text" id="book-title" wire:model.defer="book.title">
             @error('book.title') <p class="w-52 text-sm text-red-600 font-bold overflow-auto whitespace-normal">{{ $message }}</p> @enderror
         </div>
     </div>

@@ -1,9 +1,8 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\FirstController;
-use App\Http\Controllers\SecondController;
 
 
 /*
@@ -17,7 +16,7 @@ use App\Http\Controllers\SecondController;
 |
 */
 
-Route::get('/', fn() => view('welcome'));
-
-//Route::get('/s', [SecondController::class, 'index'] );
+//Route::get('/', fn() => view('welcome'));
+Route::get('/', [EventController::class, 'index']);
+Route::post('/event', [EventController::class, 'createEvent']);
 

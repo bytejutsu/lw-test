@@ -21,36 +21,32 @@ class BookSearchListSettingsComponent extends Component
         $this->maxBooks = 5;
     }
 
-    public function updatedShowBookImage()
+    public function updatedShowBookImage($value)
     {
         $this->validateOnly('showBookImage');
 
-        $this->notifyAboutShowBookImage();
+        session(['showBookImage' => $value]);
+
+        $this->notifyAboutSettings();
     }
 
-    public function updatedMaxBooks()
+    public function updatedMaxBooks($value)
     {
         $this->validateOnly('maxBooks');
 
-        //$this->validate();
+        session(['maxBooks' => $value]);
 
-        $this->notifyAboutMaxBooks();
+        $this->notifyAboutSettings();
     }
 
-    private function notifyAboutShowBookImage()
+    private function notifyAboutSettings()
     {
-        $this->emitTo('book-list-component', 'showBookImageUpdated', $this->showBookImage);
-    }
-
-    private function notifyAboutMaxBooks()
-    {
-        $this->emitTo('book-list-component', 'maxBooksUpdated', $this->maxBooks);
+        $this->emit('settingsUpdated', $this->maxBooks, $this->showBookImage);
     }
 
     public function notify()
     {
-        $this->notifyAboutShowBookImage();
-        $this->notifyAboutMaxBooks();
+        $this->notifyAboutSettings();
     }
 
     public function render()

@@ -59,10 +59,14 @@
     <div class="flex justify-center items-center space-x-2">
         <label for="email" class="tracking-wide font-bold">Email:</label>
         <div class="flex flex-col justify-center items-center space-y-1">
-            <input id="email" type="email" wire:model="email">
+            {{-- if you are expecting a click after the input use wire.model.lazy --}}
+            <input id="email" type="email" wire:model.lazy="email">
             @error('email') <p class="text-sm text-red-600 font-bold">{{ $message }}</p> @enderror
         </div>
-        <button wire:click.prevent="handleSendClick" class="bg-orange-300 text-white font-bold p-2 m-2 shadow-lg">Send Books List</button>
+        <div wire:loading.inline class="font-bold text-gray-400 justify-center">Sending Email...</div>
+        <div wire:loading.remove>
+            <button wire:click.prevent="handleSendClick" class="bg-orange-300 text-white font-bold p-2 m-2 shadow-lg">Send Books List</button>
+        </div>
     </div>
 
 </div>

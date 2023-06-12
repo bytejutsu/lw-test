@@ -14,6 +14,8 @@
         <style>
         </style>
 
+        @vite(['resources/css/app.css'])
+
         @livewireStyles
 
         {{-- Scripts --}}
@@ -24,7 +26,6 @@
         <!-- Alpine Core -->
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-        @vite('resources/css/app.css')
     </head>
     <body class="">
         <div class="flex flex-col justify-start items-center">
@@ -32,12 +33,37 @@
         </div>
 
 
+
+        @vite(['resources/js/app.js'])
+
         {{-- Scripts --}}
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                window.Echo.channel('books')
+                    .listen('BooksFetchedEvent', (e) => {
+                        console.log('event broadcasted successfully');
+                    });
+            });
+        </script>
+
+
+        {{--
+        <script>
+            window.onload=function () {
+                Echo.channel('books')
+                    .listen('BooksFetchedEvent', (e) => {
+                        console.log('event broadcasted successfully');
+                    });
+            }
+        </script>
+        --}}
 
         @livewireScripts
 
         {{-- don't show livewire errors on production --}}
 
+        {{--
         @production
             <script>
                 Livewire.onError(function (message, response) {
@@ -45,6 +71,7 @@
                 });
             </script>
         @endproduction
+        --}}
 
     </body>
 </html>

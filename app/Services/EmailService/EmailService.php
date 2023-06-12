@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Mail;
 
 class EmailService
 {
-    public function sendBookListEmail(array $books, string $email)
+    public function sendBookListEmail(string $email, array $books, bool $showBookImage)
     {
         if (empty($books)) {
             // Handle the case when no books are available or the search hasn't been performed yet
@@ -16,6 +16,7 @@ class EmailService
         $emailData = [
             'email' => $email,
             'books' => $books,
+            'showBookImage' => $showBookImage,
         ];
 
         Mail::to($email)->send(new BookListEmail($emailData));
