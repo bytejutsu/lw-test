@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', fn() => view('welcome'));
-Route::get('/', [EventController::class, 'index']);
-Route::post('/event', [EventController::class, 'createEvent']);
+Route::get('/', fn() => view('welcome'));
+
+//Route::get('/', [EventController::class, 'index']);
+//Route::post('/event', [EventController::class, 'createEvent']);
 

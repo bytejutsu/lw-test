@@ -26,10 +26,10 @@ import Echo from 'laravel-echo';
 let echo = new Echo({
     namespace: false, //important to not prefix event names with a dot when listening to them
     broadcaster: 'pusher',
-        key: import.meta.env.VITE_PUSHER_APP_KEY,
-        cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
-        forceTLS: true
-    });
+    key: import.meta.env.VITE_PUSHER_APP_KEY,
+    cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+    forceTLS: true
+});
 
 //console.log(echo);
 
@@ -47,12 +47,24 @@ window.Echo.channel('books')
         // Show the event message
         console.log('event received');
         // Store the books data in the global variable
-        window.books = event.books;
+        //window.books = event.books;
         // Show the books data in the console
         console.log(event.books);
         //emit the event to the DummyBooksListComponent
         //Livewire.emitTo('dummy-books-list-component', 'BooksFetchedEvent', event.books);
     });
+
+
+
+//Alpine
+
+import Alpine from 'alpinejs';
+import persist from '@alpinejs/persist';
+
+Alpine.plugin(persist)
+
+window.Alpine = Alpine;
+Alpine.start();
 
 
 

@@ -2,11 +2,8 @@
 
 namespace App\Http\Livewire;
 
-use App\Events\BooksFetchedEvent;
 use App\Jobs\FetchBooksJob;
 use App\Models\WireableBook;
-use App\Services\BookService\BookService;
-use Doctrine\Inflector\Rules\NorwegianBokmal\Inflectible;
 use Livewire\Component;
 
 class BookListComponent extends Component
@@ -19,20 +16,11 @@ class BookListComponent extends Component
 
     public bool $showBookImage;
 
-
-    protected $listeners = ['echo:books,App\\Events\\BooksFetchedEvent' => 'myBooksFetched','bookUpdated',];  //'settingsUpdated',
-
-
-    /*
-    public function getListeners()
-    {
-        return [
-            "bookUpdated",
-            //"settingsUpdated",
-            "echo:books,BooksFetchedEvent" => 'onBooksFetched',
-        ];
-    }
-    */
+    protected $listeners = [
+        'echo:books,BooksFetchedEvent' => 'onBooksFetched',
+        'bookUpdated',
+        //'settingsUpdated'
+    ];
 
     public function mount()
     {
@@ -40,9 +28,10 @@ class BookListComponent extends Component
     }
 
 
-    public function myBooksFetched($books)
+    public function onBooksFetched($value)
     {
-        dd('booksFetched is fired');
+        $books = $value["books"];
+
         $this->arrayBooks = $books;
     }
 
@@ -53,18 +42,12 @@ class BookListComponent extends Component
         $bookTitle = $bookData['title'];
         $maxBooks = session('maxBooks', 5);
 
-        //$this->wireableBooks = BookService::getWireableBooks($bookData['title']);
-        //$this->arrayBooks = BookService::getArrayBooks($bookTitle);
-
         try{
-            //$this->arrayBooks = BookService::getArrayBooksWithImage($bookTitle, $maxBooks);
-            //dispatch(new FetchBooksJob($bookTitle, $maxBooks));
-            //broadcast(new BooksFetchedEvent([]));
+            dispatch(new FetchBooksJob($bookTitle, $maxBooks));
+            //dump($bookData);
         }catch(\Exception $e){
             dd($e->getMessage());
         }
-
-
 
     }
 
@@ -73,7 +56,6 @@ class BookListComponent extends Component
     // and the books property will no longer be an array of wireable objects
     // and instead it will be an array of arrays
 
-    /*
 
     public function settingsUpdated($maxBooksData, $showBookImageData)
     {
@@ -87,16 +69,11 @@ class BookListComponent extends Component
 
         try{
             dispatch(new FetchBooksJob($bookTitle, $maxBooks));
-            //$this->arrayBooks = BookService::getArrayBooksWithImage($bookTitle, $maxBooks);
         }catch(\Exception $e){
             dd($e->getMessage());
         }
 
     }
-
-    */
-
-
 
 
     public function render()

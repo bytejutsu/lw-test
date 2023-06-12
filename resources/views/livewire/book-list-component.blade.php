@@ -9,9 +9,11 @@
         @if(isset($arrayBooks))
             <div wire:loading.flex class="font-bold text-gray-400 justify-center">Fetching Books...</div>
             <div wire:loading.remove>
+
                 @if(empty($arrayBooks))
                     <div class="font-bold p-2 overflow-auto whitespace-normal text-center">No Matching Results</div>
                 @endif
+
                 <ul>
                     @foreach($arrayBooks as $book)
                         <li class="divide-y-2">
@@ -33,7 +35,6 @@
             <p class="font-bold p-2 text-center">Loading ...</p>
         @endif
     </div>
-
 </div>
 
 

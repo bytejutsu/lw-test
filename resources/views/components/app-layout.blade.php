@@ -6,25 +6,25 @@
 
         <title>Laravel</title>
 
-        <!-- Fonts -->
+        {{-- Fonts --}}
+
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
+        {{-- Vite bundled CSS and JS--}}
+
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+
         <!-- Styles -->
+
         <style>
         </style>
-
-        @vite(['resources/css/app.css'])
 
         @livewireStyles
 
         {{-- Scripts --}}
 
-        <!-- Alpine Plugins -->
-        <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
-
-        <!-- Alpine Core -->
-        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     </head>
     <body class="">
@@ -34,36 +34,12 @@
 
 
 
-        @vite(['resources/js/app.js'])
-
         {{-- Scripts --}}
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                window.Echo.channel('books')
-                    .listen('BooksFetchedEvent', (e) => {
-                        console.log('event broadcasted successfully');
-                    });
-            });
-        </script>
-
-
-        {{--
-        <script>
-            window.onload=function () {
-                Echo.channel('books')
-                    .listen('BooksFetchedEvent', (e) => {
-                        console.log('event broadcasted successfully');
-                    });
-            }
-        </script>
-        --}}
 
         @livewireScripts
 
         {{-- don't show livewire errors on production --}}
 
-        {{--
         @production
             <script>
                 Livewire.onError(function (message, response) {
@@ -71,7 +47,6 @@
                 });
             </script>
         @endproduction
-        --}}
 
     </body>
 </html>
