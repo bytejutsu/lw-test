@@ -6,7 +6,9 @@ use Livewire\Component;
 
 class DummyBooksListComponent extends Component
 {
-    protected $listeners = ['BooksFetchedEvent' => 'booksUpdated'];
+    //protected $listeners = ['BooksFetchedEvent' => 'booksUpdated'];
+
+    protected $listeners = ['echo:books,.BooksFetchedEvent' => 'booksUpdated'];
 
     public array $books;
 
@@ -19,7 +21,9 @@ class DummyBooksListComponent extends Component
     {
         //dd($value);
 
-        $this->books = $value;
+        $books = $value['books'];
+
+        $this->books = $books;
     }
 
     public function render()
