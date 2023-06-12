@@ -24,7 +24,8 @@ import Echo from 'laravel-echo';
 
 //start of added by me
 let echo = new Echo({
-        broadcaster: 'pusher',
+    namespace: false, //important to not prefix event names with a dot when listening to them
+    broadcaster: 'pusher',
         key: import.meta.env.VITE_PUSHER_APP_KEY,
         cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
         forceTLS: true
@@ -42,7 +43,7 @@ window.Echo.channel('books')
 })
 
 window.Echo.channel('books')
-    .listen('.BooksFetchedEvent', (event) => {
+    .listen('BooksFetchedEvent', (event) => {
         // Show the event message
         console.log('event received');
         // Store the books data in the global variable

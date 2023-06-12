@@ -8,7 +8,7 @@ class DummyBooksListComponent extends Component
 {
     //protected $listeners = ['BooksFetchedEvent' => 'booksUpdated'];
 
-    protected $listeners = ['echo:books,.BooksFetchedEvent' => 'booksUpdated'];
+    protected $listeners = ['echo:books,BooksFetchedEvent' => 'booksUpdated'];
 
     public array $books;
 
