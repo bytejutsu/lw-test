@@ -49,6 +49,8 @@ window.Echo.channel('books')
         window.books = event.books;
         // Show the books data in the console
         console.log(event.books);
+        //emit the event to the DummyBooksListComponent
+        Livewire.emitTo('dummy-books-list-component', 'BooksFetchedEvent', event.books);
     });
 
 
