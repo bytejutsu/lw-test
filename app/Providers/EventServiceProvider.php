@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Events\BooksFetchedEvent;
-use App\Listeners\SendBooksFetchedNotification;
+use App\Events\ProductsFetchedEvent;
+use App\Listeners\SendProductsFetchedNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;

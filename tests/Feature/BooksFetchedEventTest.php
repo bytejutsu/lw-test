@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Events\BooksFetchedEvent;
+use App\Events\ProductsFetchedEvent;
 use App\Http\Livewire\BookListComponent;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;

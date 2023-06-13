@@ -37,19 +37,19 @@ let echo = new Echo({
 window.Echo = echo;
 
 
-window.Echo.channel('books')
+window.Echo.channel('products')
     .pusher.connection.bind('connected', () => {
     console.log('Subscribed to channel successfully');
 })
 
-window.Echo.channel('books')
-    .listen('BooksFetchedEvent', (event) => {
+window.Echo.channel('products')
+    .listen('ProductsFetchedEvent', (event) => {
         // Show the event message
         console.log('event received');
         // Store the books data in the global variable
         //window.books = event.books;
         // Show the books data in the console
-        console.log(event.books);
+        console.log(event.products);
         //emit the event to the DummyBooksListComponent
         //Livewire.emitTo('dummy-books-list-component', 'BooksFetchedEvent', event.books);
     });

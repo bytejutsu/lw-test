@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\BooksFetchedEvent;
-use App\Jobs\FetchBooksJob;
+use App\Events\ProductsFetchedEvent;
+use App\Jobs\FetchProductsJob;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -16,7 +16,7 @@ class EventController extends Controller
 
     public function createEvent() {
         //broadcast(new BooksFetchedEvent(['some books' . rand() .  'from the controller']));
-        dispatch(new FetchBooksJob('', 5));
+        dispatch(new FetchProductsJob('', 5));
         return response()->json(['status' => 'Event dispatched']);
     }
 }

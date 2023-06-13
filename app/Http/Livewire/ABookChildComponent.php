@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\WireableBook;
+use App\Models\WireableProduct;
 use App\Models\EBook;
 use Livewire\Component;
 

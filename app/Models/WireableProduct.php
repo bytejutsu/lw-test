@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Livewire\Wireable;
 
-class WireableBook implements Wireable
+class WireableProduct implements Wireable
 {
     public $title;
     public $author;

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\BookService;
+namespace App\Services\ProductService;
 
-use App\Models\WireableBook;
+use App\Models\WireableProduct;
 use Illuminate\Support\Facades\Http;
 
-class BookService
+class ProductService
 {
     public static function getWireableBooks($bookTitle, $maxBooks = 5): array
     {
@@ -21,7 +21,7 @@ class BookService
                 $booksData = array_splice($allBooksData, 0, $maxBooks);
 
                 // Map the JSON data to an array of Book objects
-                $books = array_map(fn ($bookData) => new WireableBook($bookData['title'], 'not provided'), $booksData);
+                $books = array_map(fn ($bookData) => new WireableProduct($bookData['title'], 'not provided'), $booksData);
 
                 return $books;
             }
@@ -66,7 +66,7 @@ class BookService
         return [];
     }
 
-    public static function getArrayBooksWithImage($productTitle, $limit = 5, $showProductImage = true)
+    public static function getArrayProductsWithImage($productTitle, $limit = 5, $showProductImage = true)
     {
         $apiUrl = 'https://dummyjson.com/products';
         $searchEndpoint = "/search?q={$productTitle}&limit={$limit}&select=title,images";

@@ -2,11 +2,11 @@
 
 namespace App\Listeners;
 
-use App\Events\BooksFetchedEvent;
+use App\Events\ProductsFetchedEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendBooksFetchedNotification
+class SendProductsFetchedNotification
 {
     /**
      * Create the event listener.
@@ -19,8 +19,8 @@ class SendBooksFetchedNotification
     /**
      * Handle the event.
      */
-    public function handle(BooksFetchedEvent $event): void
+    public function handle(ProductsFetchedEvent $event): void
     {
-        dd($event->books);
+        dd($event->products);
     }
 }

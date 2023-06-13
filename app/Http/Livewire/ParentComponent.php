@@ -3,8 +3,8 @@
 namespace App\Http\Livewire;
 
 use App\Models\EBook;
-use App\Models\WireableBook;
-use App\Services\BookService\BookService;
+use App\Models\WireableProduct;
+use App\Services\ProductService\ProductService;
 use App\Services\EmailService\EmailService;
 use App\Services\EncryptionService;
 use App\Services\SharedStateService\SharedStateService;
@@ -15,7 +15,7 @@ class ParentComponent extends Component
 
     public array $aBook;
     public EBook $eBook;
-    public WireableBook $book;
+    public WireableProduct $product;
 
     public string $email;
 
@@ -33,7 +33,11 @@ class ParentComponent extends Component
     ];
 
 
-    protected $listeners = ['aBookUpdated','eBookUpdated','bookUpdated'];
+    protected $listeners = [
+        'aBookUpdated',
+        'eBookUpdated',
+        'productUpdated'
+    ];
 
     public function aBookUpdated($aBookData)
     {
@@ -48,22 +52,22 @@ class ParentComponent extends Component
         $this->eBook->author = $eBookData['author'];
     }
 
-    public function bookUpdated($bookData)
+    public function productUpdated($productData)
     {
         //bookData is an array because it is sent via an emit event => serialized
 
-        if(isset($this->book)){
-            $this->book->title = $bookData['title'];
-            $this->book->author = $bookData['author'];
+        if(isset($this->product)){
+            $this->product->title = $productData['title'];
+            $this->product->author = $productData['author'];
         }else{
-            $this->book = new WireableBook($bookData['title'], $bookData['author']);
+            $this->product = new WireableProduct($productData['title'], $productData['author']);
         }
 
     }
 
-    public function getBookTitleLetterCountProperty()
+    public function getProductTitleLetterCountProperty()
     {
-        return strlen($this->book->title);
+        return strlen($this->product->title);
     }
 
 
@@ -99,20 +103,20 @@ class ParentComponent extends Component
 
     private function sendBookListEmail(EmailService $emailService)
     {
-        $book =  session('book', new WireableBook('',''));
-        $showBookImage = session('showBookImage', true);
-        $maxBooks = session('maxBooks', 5);
+        $product =  session('product', new WireableProduct('',''));
+        $showProductImage = session('showProductImage', true);
+        $limit = session('limit', 5);
 
-        $books = [];
+        $products = [];
 
         try{
-            $books = BookService::getArrayBooksWithImage($book->title, $maxBooks);
+            $products = ProductService::getArrayProductsWithImage($product->title, $limit);
         }catch(\Exception $e){
             dd($e->getMessage());
         }
 
         try{
-            $emailService->sendBookListEmail($this->email, $books, $showBookImage);
+            $emailService->sendBookListEmail($this->email, $products, $showProductImage);
         }catch(\Exception $e){
             dd($e->getMessage());
         }
