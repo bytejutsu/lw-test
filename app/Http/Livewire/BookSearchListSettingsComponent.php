@@ -41,7 +41,7 @@ class BookSearchListSettingsComponent extends Component
 
     private function notifyAboutSettings()
     {
-        $this->emit('settingsUpdated', $this->maxBooks, $this->showBookImage);
+        $this->emitTo('book-list-component', 'settingsUpdated', $this->maxBooks, $this->showBookImage);
     }
 
     public function notify()

@@ -35,18 +35,18 @@ class BookService
         return [];
     }
 
-    public static function getArrayBooks($bookTitle, $maxBooks = 5): array
+    public static function getArrayBooks($productTitle, $limit = 5): array
     {
-        if(!empty($bookTitle)) {
-            // Make an API request to fetch the books
-            $response = Http::get("https://api.itbook.store/1.0/search/{$bookTitle}/1");
+        if(!empty($productTitle)) {
+            // Make an API request to fetch the products
+            $response = Http::get("https://api.itbook.store/1.0/search/{$productTitle}/1");
 
             // Check if the request was successful
             if ($response->successful()) {
                 $allBooksData = $response->json()['books'];
 
                 //minimize the array to max 10 elements
-                $booksData = array_splice($allBooksData, 0, $maxBooks);
+                $booksData = array_splice($allBooksData, 0, $limit);
 
                 // Map the JSON data to an array of Book objects
 
@@ -66,10 +66,10 @@ class BookService
         return [];
     }
 
-    public static function getArrayBooksWithImage($bookTitle, $maxBooks = 5)
+    public static function getArrayBooksWithImage($productTitle, $limit = 5, $showProductImage = true)
     {
-        $apiUrl = 'https://api.itbook.store/1.0';
-        $searchEndpoint = "/search/{$bookTitle}/1";
+        $apiUrl = 'https://dummyjson.com/products';
+        $searchEndpoint = "/search?q={$productTitle}&limit={$limit}&select=title,images";
         $searchResponse = Http::get($apiUrl . $searchEndpoint);
 
         if ($searchResponse->failed()) {
@@ -78,22 +78,13 @@ class BookService
 
         $searchResult = $searchResponse->json();
 
-        $books = [];
-        foreach($searchResult['books'] as $book) {
-            $bookInfoEndpoint = "/books/{$book['isbn13']}";
-            $bookInfoResponse = Http::get($apiUrl . $bookInfoEndpoint);
+        $productsData = $searchResult["products"];
 
-            if ($bookInfoResponse->failed()) {
-                continue; // handle error here, maybe log or throw exception
-            }
+        $products = array_map(fn ($productData) => ['title' => $productData['title'],'image' => $productData['images'][0]], $productsData);
 
-            $bookInfo = $bookInfoResponse->json();
-            $books[] = ['title' => $bookInfo['title'], 'image' => $bookInfo['image']];
-        }
+        //dd($products);
 
-        //dd($books);
-
-        return array_splice( $books, 0, $maxBooks);
+        return $products;
     }
 
     /*

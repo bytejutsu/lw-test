@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Jobs\FetchBooksJob;
 use App\Models\WireableBook;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class BookListComponent extends Component
@@ -19,7 +20,7 @@ class BookListComponent extends Component
     protected $listeners = [
         'echo:books,BooksFetchedEvent' => 'onBooksFetched',
         'bookUpdated',
-        //'settingsUpdated'
+        'settingsUpdated'
     ];
 
     public function mount()
@@ -45,6 +46,7 @@ class BookListComponent extends Component
         try{
             dispatch(new FetchBooksJob($bookTitle, $maxBooks));
             //dump($bookData);
+            Log::debug('bookUpdated is fired, $bookData is: ' . print_r($bookData, true));
         }catch(\Exception $e){
             dd($e->getMessage());
         }
@@ -59,6 +61,7 @@ class BookListComponent extends Component
 
     public function settingsUpdated($maxBooksData, $showBookImageData)
     {
+
         $maxBooks = $maxBooksData;
         $showBookImage = $showBookImageData;
 

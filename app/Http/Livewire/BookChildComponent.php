@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\WireableBook;
 use App\Models\EBook;
 use App\Services\SharedStateService\SharedStateService;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class BookChildComponent extends Component
@@ -24,11 +25,12 @@ class BookChildComponent extends Component
 
     public function mount()
     {
-        $this->book = new WireableBook("Laravel", "Matt Stauffer");
+        $this->book = new WireableBook("phone", "Matt Stauffer");
     }
 
-    public function updatedBook()
+    public function updatedBook($value)
     {
+
         $this->validateOnly('book.*'); //this works only because we used 'book.*' in the rules if not it won't work
 
         session(['book' => $this->book]);
@@ -44,6 +46,7 @@ class BookChildComponent extends Component
         $this->emitTo('parent-component', 'bookUpdated', $this->book);
 
         $this->emitTo('book-list-component', 'bookUpdated', $this->book);
+
     }
 
     public function notify()
