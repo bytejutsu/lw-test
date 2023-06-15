@@ -33,6 +33,9 @@
         </div>
 
 
+        {{-- 3rd Party Components --}}
+
+        <x-toaster-hub />
 
         {{-- Scripts --}}
 

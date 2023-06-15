@@ -39,9 +39,15 @@ window.Echo = echo;
 
 window.Echo.channel('products')
     .pusher.connection.bind('connected', () => {
-    console.log('Subscribed to channel successfully');
-})
+    console.log('Subscribed to products channel successfully');
+});
 
+window.Echo.channel('emails')
+    .pusher.connection.bind('connected', () => {
+    console.log('Subscribed to emails channel successfully');
+});
+
+/*
 window.Echo.channel('products')
     .listen('ProductsFetchedEvent', (event) => {
         // Show the event message
@@ -53,8 +59,19 @@ window.Echo.channel('products')
         //emit the event to the DummyBooksListComponent
         //Livewire.emitTo('dummy-books-list-component', 'BooksFetchedEvent', event.books);
     });
+*/
 
-
+window.Echo.channel('emails')
+    .listen('ProductListEmailSentEvent', (event) => {
+        // Show the event message
+        console.log('event received');
+        // Store the books data in the global variable
+        //window.books = event.books;
+        // Show the books data in the console
+        console.log(event.message);
+        //emit the event to the DummyBooksListComponent
+        //Livewire.emitTo('dummy-books-list-component', 'BooksFetchedEvent', event.books);
+    });
 
 //Alpine
 
@@ -62,6 +79,10 @@ import Alpine from 'alpinejs';
 import persist from '@alpinejs/persist';
 
 Alpine.plugin(persist)
+
+import Toaster from '../../vendor/masmerise/livewire-toaster/resources/js';
+
+Alpine.plugin(Toaster);
 
 window.Alpine = Alpine;
 Alpine.start();

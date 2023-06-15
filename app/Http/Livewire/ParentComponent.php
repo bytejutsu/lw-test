@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Jobs\SendProductListEmailJob;
 use App\Models\EBook;
 use App\Models\WireableProduct;
 use App\Services\EmailService\EmailService;
@@ -9,6 +10,7 @@ use App\Services\EncryptionService\EncryptionService;
 use App\Services\ProductService\ProductService;
 use App\Services\SharedStateService\SharedStateService;
 use Livewire\Component;
+use Masmerise\Toaster\Toaster;
 
 class ParentComponent extends Component
 {
@@ -34,6 +36,7 @@ class ParentComponent extends Component
 
 
     protected $listeners = [
+        'echo:emails,ProductListEmailSentEvent' => 'onProductListEmailSent',
         'aBookUpdated',
         'eBookUpdated',
         'productUpdated'
@@ -97,10 +100,6 @@ class ParentComponent extends Component
         $productService = app(\App\Services\ProductService\ProductService::class);
 
         $this->sendProductListEmail($emailService, $productService);
-
-        // Clear the email input field after sending the email
-        //todo: find out why this doesn't work an raises an error //$this->reset('email');
-        $this->email = '';
     }
 
     private function sendProductListEmail(EmailService $emailService, ProductService $productService)
@@ -118,12 +117,31 @@ class ParentComponent extends Component
         }
 
         try{
-            $emailService->sendProductListEmail($this->email, $products, $showProductImage);
+            //$emailService->sendProductListEmail();
+            SendProductListEmailJob::dispatch($this->email, $products, $showProductImage);
         }catch(\Exception $e){
             dd($e->getMessage());
         }
 
 
+    }
+
+    public function onProductListEmailSent($value)
+    {
+        // Clear the email input field after sending the email
+        //todo: find out why this doesn't work an raises an error //$this->reset('email');
+        $this->email = '';
+
+        $message = $value['message'];
+
+        //dd($message);
+
+        if($message === "email sent successfully")
+        {
+            Toaster::success($message);
+        }else{
+            Toaster::error($message);
+        }
     }
 
     public function mount(SharedStateService $sharedStateService) //todo: this must be called at least one time so SharedStateService resolves :(

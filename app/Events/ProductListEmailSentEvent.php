@@ -8,23 +8,23 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ProductsFetchedEvent implements ShouldBroadcast
+class ProductListEmailSentEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public array $products;
-
+    public string $message;
     /**
      * Create a new event instance.
      */
-    public function __construct(array $products)
+    public function __construct(string $message)
     {
-        $this->products = $products;
+        //
+        $this->message = $message;
     }
 
-    public function broadcastAs(): string
+    public function broadcastAs()
     {
-        return 'ProductsFetchedEvent';
+        return 'ProductListEmailSentEvent';
     }
 
     /**
@@ -32,10 +32,10 @@ class ProductsFetchedEvent implements ShouldBroadcast
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-
     public function broadcastOn(): array
     {
-        return [new Channel('products')];
+        return [
+            new Channel('emails'),
+        ];
     }
-
 }
