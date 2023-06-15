@@ -3,8 +3,8 @@
     {{-- notify will be called on init so the child-component properties will be emitted to the parent --}}
 
     <div x-data="{
-        bookTile: $persist(@entangle('book.title')),
-        bookAuthor: $persist(@entangle('book.author')),
+        productTile: $persist(@entangle('product.title')),
+        productAuthor: $persist(@entangle('product.author')),
     }">
     </div>
 

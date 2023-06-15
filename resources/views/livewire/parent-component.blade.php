@@ -15,7 +15,7 @@
 
             <hr/>
 
-            <p>ABook title letter count : <span class="text-blue-500">{{ $this->aBookTitleLetterCount }}</span></p>
+            <p>ABook title letter count : <span class="text-blue-500 font-bold">{{ $this->aBookTitleLetterCount }}</span></p>
 
             <hr/>
 
@@ -27,7 +27,7 @@
 
             <hr/>
 
-            <p>EBook title letter count : <span class="text-red-500">{{ $this->eBookTitleLetterCount }}</span></p>
+            <p>EBook title letter count : <span class="text-red-500 font-bold">{{ $this->eBookTitleLetterCount }}</span></p>
 
             <hr/>
 

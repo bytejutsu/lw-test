@@ -10,7 +10,7 @@
             <div wire:loading.flex class="font-bold text-gray-400 justify-center">Fetching Products...</div>
             <div wire:loading.remove>
 
-                @if(empty($arrayProduct))
+                @if(empty($arrayProducts))
                     <div class="font-bold p-2 overflow-auto whitespace-normal text-center">No Matching Results</div>
                 @endif
 

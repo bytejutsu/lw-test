@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class BookListEmail extends Mailable
+class ProductListEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -21,8 +21,8 @@ class BookListEmail extends Mailable
 
     public function build()
     {
-        return $this->view('emails.book-list')
+        return $this->view('emails.product-list')
             ->with($this->emailData)
-            ->subject('Book List Email');
+            ->subject('Product List Email');
     }
 }

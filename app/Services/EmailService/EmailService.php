@@ -6,20 +6,20 @@ use Illuminate\Support\Facades\Mail;
 
 class EmailService
 {
-    public function sendBookListEmail(string $email, array $books, bool $showBookImage)
+    public function sendProductListEmail(string $email, array $products, bool $showProductImage)
     {
-        if (empty($books)) {
+        if (empty($products)) {
             // Handle the case when no books are available or the search hasn't been performed yet
             return;
         }
 
         $emailData = [
             'email' => $email,
-            'books' => $books,
-            'showBookImage' => $showBookImage,
+            'products' => $products,
+            'showProductImage' => $showProductImage,
         ];
 
-        Mail::to($email)->send(new BookListEmail($emailData));
+        Mail::to($email)->send(new ProductListEmail($emailData));
     }
 
 }

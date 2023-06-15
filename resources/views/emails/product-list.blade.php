@@ -2,24 +2,24 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Book List Email</title>
+    <title>Product List Email</title>
 </head>
 <body>
-<h2>Book List</h2>
-<p>Here is the list of books you requested:</p>
+<h2>Product List</h2>
+<p>Here is the list of products you requested:</p>
 
 <ul>
-    @if(empty($books))
+    @if(empty($products))
         <div class="font-bold p-2 overflow-auto whitespace-normal text-center">No Results</div>
     @else
         <ul>
-            @foreach($books as $book)
+            @foreach($products as $product)
                 <li class="divide-y-2">
                     <div class="flex flex-row justify-start items-center space-x-2">
-                        @if($showBookImage)
-                            <img class="object-contain h-24 w-12" src="{{$book['image']}}" alt="book-image">
+                        @if($showProductImage)
+                            <img class="object-contain h-24 w-12" src="{{$product['image']}}" alt="book-image">
                         @endif
-                        <span class="w-96 font-bold p-2 overflow-auto whitespace-normal">{{$book['title']}}</span>
+                        <span class="w-96 font-bold p-2 overflow-auto whitespace-normal">{{$product['title']}}</span>
                     </div>
                     <div class="divider"></div>
                 </li>

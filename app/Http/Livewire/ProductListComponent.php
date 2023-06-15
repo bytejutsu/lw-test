@@ -68,6 +68,7 @@ class ProductListComponent extends Component
         $this->showProductImage = $showProductImage;
 
         $product = session('product', new WireableProduct('',''));
+
         $productTitle = $product->title;
 
         try{

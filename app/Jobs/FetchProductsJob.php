@@ -31,9 +31,9 @@ class FetchProductsJob implements ShouldQueue
     /**
      * Execute the job.
      */
-    public function handle(): void
+    public function handle(ProductService $productService): void
     {
-        $products = ProductService::getArrayProductsWithImage($this->productTitle, $this->limit);
+        $products = $productService->getProducts($this->productTitle, $this->limit);
         //event(new ProductsFetchedEvent($products));
         ProductsFetchedEvent::dispatch($products);
     }

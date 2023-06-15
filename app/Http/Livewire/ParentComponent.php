@@ -4,9 +4,9 @@ namespace App\Http\Livewire;
 
 use App\Models\EBook;
 use App\Models\WireableProduct;
-use App\Services\ProductService\ProductService;
 use App\Services\EmailService\EmailService;
-use App\Services\EncryptionService;
+use App\Services\EncryptionService\EncryptionService;
+use App\Services\ProductService\ProductService;
 use App\Services\SharedStateService\SharedStateService;
 use Livewire\Component;
 
@@ -94,14 +94,16 @@ class ParentComponent extends Component
 
         $emailService = app(\App\Services\EmailService\EmailService::class);
 
-        $this->sendBookListEmail($emailService);
+        $productService = app(\App\Services\ProductService\ProductService::class);
+
+        $this->sendProductListEmail($emailService, $productService);
 
         // Clear the email input field after sending the email
         //todo: find out why this doesn't work an raises an error //$this->reset('email');
         $this->email = '';
     }
 
-    private function sendBookListEmail(EmailService $emailService)
+    private function sendProductListEmail(EmailService $emailService, ProductService $productService)
     {
         $product =  session('product', new WireableProduct('',''));
         $showProductImage = session('showProductImage', true);
@@ -110,13 +112,13 @@ class ParentComponent extends Component
         $products = [];
 
         try{
-            $products = ProductService::getArrayProductsWithImage($product->title, $limit);
+            $products = $productService->getProducts($product->title, $limit);
         }catch(\Exception $e){
             dd($e->getMessage());
         }
 
         try{
-            $emailService->sendBookListEmail($this->email, $products, $showProductImage);
+            $emailService->sendProductListEmail($this->email, $products, $showProductImage);
         }catch(\Exception $e){
             dd($e->getMessage());
         }
