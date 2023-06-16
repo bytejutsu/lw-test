@@ -37,12 +37,12 @@
     </div>
 
     <div class="flex flex-row justify-between">
-        <div class="basis-1/3 flex flex-col">
-            here comes the map
+        <div class="basis-1/3">
+            <livewire:maps-component/>
         </div>
 
-        <div class="basis-1/3 flex flex-col">
-            here comes the coordinates list
+        <div class="basis-1/3">
+            <livewire:mark-list-component/>
         </div>
 
         <div class="basis-1/3 flex flex-col justify-start items-stretch">
