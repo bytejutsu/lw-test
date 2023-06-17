@@ -19,10 +19,10 @@
             </div>
             <div class="pl-4">
                 <div class="w-fit bg-red-500 text-white text-sm font-bold p-2 ">Database Service</div>
-                <p><span class="text-red-500">EBook Title: </span>{{ $eBook['title'] }}</p>
-                <p><span class="text-red-500">EBook Author: </span>{{ $eBook['author'] }}</p>
+                <p><span class="text-red-500">Marker latitude: </span>{{ $marker['lat'] }}</p>
+                <p><span class="text-red-500">Marker longitude: </span>{{ $marker['long'] }}</p>
                 <hr/>
-                <p>EBook title letter count : <span class="text-red-500 font-bold">{{ $this->eBookTitleLetterCount }}</span></p>
+                <p>Total Markers : <span class="text-red-500 font-bold">{{ $this->markersCount }}</span></p>
                 <hr/>
             </div>
             <div class="pl-4">
@@ -38,11 +38,11 @@
 
     <div class="flex flex-row justify-between">
         <div class="basis-1/3">
-            <livewire:maps-component/>
+            <livewire:maps-component :markers="$markers"/>
         </div>
 
         <div class="basis-1/3">
-            <livewire:mark-list-component/>
+            <livewire:marker-list-component/>
         </div>
 
         <div class="basis-1/3 flex flex-col justify-start items-stretch">
@@ -54,7 +54,7 @@
 
     <div class="flex justify-between">
         <livewire:a-book-child-component :aBook="$aBook"/>
-        <livewire:e-book-child-component :eBook="$eBook"/>
+        <livewire:marker-child-component :marker="$marker"/>
         <livewire:product-child-component/>
     </div>
 

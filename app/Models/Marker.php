@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EBook extends Model
+class Marker extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'title',
-        'author',
+        'lat',
+        'long',
     ];
+
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Jobs\SendProductListEmailJob;
-use App\Models\EBook;
+use App\Models\Marker;
 use App\Models\WireableProduct;
 use App\Services\EmailService\EmailService;
 use App\Services\EncryptionService\EncryptionService;
@@ -16,7 +16,8 @@ class ParentComponent extends Component
 {
 
     public array $aBook;
-    public EBook $eBook;
+    public array $markers;
+    public Marker $marker;
     public WireableProduct $product;
 
     public string $email;
@@ -51,8 +52,8 @@ class ParentComponent extends Component
     public function eBookUpdated($eBookData)
     {
         //eBookData is an array because it is sent via an emit event => serialized
-        $this->eBook->title = $eBookData['title'];
-        $this->eBook->author = $eBookData['author'];
+        $this->markers->title = $eBookData['title'];
+        $this->markers->author = $eBookData['author'];
     }
 
     public function productUpdated($productData)
@@ -74,9 +75,9 @@ class ParentComponent extends Component
     }
 
 
-    public function getEBookTitleLetterCountProperty()
+    public function getMarkersCountProperty()
     {
-        return strlen($this->eBook->title);
+        return Marker::all()->count();
     }
 
     public function getABookTitleLetterCountProperty()
@@ -148,7 +149,8 @@ class ParentComponent extends Component
     {
         $this->fill([
             'aBook' => ['title' => 'initial aBook title from parent', 'author' => 'initial aBook author from parent'],
-            'eBook' => EBook::inRandomOrder()->first(),
+            'markers' => Marker::all()->toArray(),
+            'marker' => Marker::first(),
             //'book' => new Book('', '')
         ]);
 

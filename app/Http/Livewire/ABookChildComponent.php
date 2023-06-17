@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\WireableProduct;
-use App\Models\EBook;
+use App\Models\Marker;
 use Livewire\Component;
 
 class ABookChildComponent extends Component

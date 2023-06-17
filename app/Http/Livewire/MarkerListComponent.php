@@ -4,10 +4,10 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-class MarkListComponent extends Component
+class MarkerListComponent extends Component
 {
     public function render()
     {
-        return view('livewire.mark-list-component');
+        return view('livewire.marker-list-component');
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\WireableProduct;
-use App\Models\EBook;
+use App\Models\Marker;
 use App\Services\SharedStateService\SharedStateService;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
